@@ -1,31 +1,3 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Directory</title>
-<style>
-body { margin:0; background:#000; color:#fff; font-family:Arial; }
-#wrap { padding:40px; }
-.row { margin:20px 0; }
-</style>
-</head>
-
-<body>
-
-<div id="wrap">
-
-<h1 id="building-number">110</h1>
-<h2 id="building-street">29TH AVENUE</h2>
-<h3 id="building-direction">NORTH</h3>
-
-<div id="time"></div>
-
-<div id="directory"></div>
-
-<h3 id="managed">MANAGED BY</h3>
-
-</div>
-
 <script>
 const URL = "https://docs.google.com/spreadsheets/d/1O_8s-4uoGnKGaWkPHQ2yYXStX1OVBjJsmK7DC3oYWJ4/gviz/tq?tqx=out:csv";
 
@@ -33,24 +5,43 @@ function load(){
  fetch(URL + "&t=" + Date.now())
  .then(r=>r.text())
  .then(t=>{
+   console.log("RAW CSV:", t); // DEBUG
+
    let rows = t.split("\n");
    let data = {};
 
    rows.forEach(r=>{
      let c = r.split(",");
-     if(c[1]) data[c[1]] = c[3];
+
+     // FLEXIBLE PARSING (THIS FIXES YOUR ISSUE)
+     let key = c[0] || c[1];
+     let value = c[1] || c[3];
+
+     if(key && value){
+       key = key.trim().replace(/"/g,'');
+       value = value.trim().replace(/"/g,'');
+
+       data[key] = value;
+     }
    });
+
+   console.log("PARSED DATA:", data); // DEBUG
 
    apply(data);
  });
 }
 
 function apply(d){
- document.getElementById("building-number").innerHTML = d.building_number || "";
- document.getElementById("building-street").innerHTML = d.building_street || "";
- document.getElementById("building-direction").innerHTML = d.building_direction || "";
- document.getElementById("managed").innerHTML = d.managed_by_text || "";
 
+ // HEADER
+ set("building-number", d.building_number);
+ set("building-street", d.building_street);
+ set("building-direction", d.building_direction);
+
+ // MANAGED
+ set("managed", d.managed_by_text);
+
+ // DIRECTORY
  let html="";
  for(let i=1;i<=3;i++){
   html+=`
@@ -58,7 +49,12 @@ function apply(d){
     ${d["suite_"+i]||""} — ${d["tenant_"+i]||""}
    </div>`;
  }
+
  document.getElementById("directory").innerHTML = html;
+}
+
+function set(id,val){
+ if(val) document.getElementById(id).innerHTML = val;
 }
 
 function time(){
@@ -75,6 +71,3 @@ setInterval(time,1000);
 load();
 time();
 </script>
-
-</body>
-</html>
