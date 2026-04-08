@@ -10,32 +10,92 @@ html, body {
   background:#000;
   color:#fff;
   font-family:Helvetica, Arial;
+  overflow:hidden;
 }
 
+/* 4K PORTRAIT */
 #screen {
   width:2160px;
   height:3840px;
   position:relative;
 }
 
-.header {position:absolute; top:120px; left:140px; right:140px;}
-.meta {position:absolute; right:0; top:0; text-align:right;}
+/* HEADER */
+.header {
+  position:absolute;
+  top:120px;
+  left:140px;
+  right:140px;
+}
 
-.time {font-size:76px;}
-.city {font-size:28px;}
+.title-line-1 { font-size:170px; font-weight:700; }
+.title-line-2 { font-size:82px; }
+.title-line-3 { font-size:52px; opacity:.7; }
 
-.directory-shell {position:absolute; top:720px; left:140px; right:140px;}
+.meta {
+  position:absolute;
+  right:0;
+  top:0;
+  text-align:right;
+}
 
-.row {padding:40px 0; border-bottom:1px solid rgba(255,255,255,.2);}
-.suite {font-size:34px;}
-.tenant {font-size:46px;}
+.time { font-size:76px; }
+.city { font-size:28px; }
 
+/* DIRECTORY */
+.directory-shell {
+  position:absolute;
+  top:720px;
+  left:140px;
+  right:140px;
+}
+
+.row {
+  padding:42px 0;
+  border-bottom:1px solid rgba(255,255,255,.2);
+}
+
+.suite {
+  font-size:34px;
+  display:inline-block;
+  width:200px;
+}
+
+.tenant {
+  font-size:46px;
+  display:inline-block;
+}
+
+.sub {
+  font-size:24px;
+  opacity:.7;
+}
+
+/* LEASING SECTION */
+.leasing-section {
+  position:absolute;
+  top:2600px;
+  left:140px;
+  right:140px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+}
+
+.leasing-title { font-size:48px; }
+.leasing-copy { font-size:28px; }
+
+/* CONTACT */
+.contact-name { font-size:34px; }
+.contact-info { font-size:24px; }
+
+/* FOOTER */
 .managed {
   position:absolute;
   bottom:180px;
   width:100%;
   text-align:center;
   font-size:52px;
+  opacity:.7;
 }
 </style>
 </head>
@@ -44,21 +104,44 @@ html, body {
 
 <div id="screen">
 
+<!-- HEADER -->
 <div class="header">
   <div>
-    <div id="building-number">110</div>
-    <div id="building-street">29TH AVENUE</div>
-    <div id="building-direction">NORTH</div>
+    <div class="title-line-1" id="building-number">110</div>
+    <div class="title-line-2" id="building-street">29TH AVENUE</div>
+    <div class="title-line-3" id="building-direction">NORTH</div>
   </div>
 
   <div class="meta">
-    <div id="time">--:--</div>
-    <div id="city">NASHVILLE TN</div>
+    <div class="time" id="time">--:--</div>
+    <div class="city" id="city">NASHVILLE TN</div>
   </div>
 </div>
 
+<!-- DIRECTORY -->
 <div class="directory-shell" id="directory"></div>
 
+<!-- LEASING -->
+<div class="leasing-section">
+  <div>
+    <div class="leasing-title" id="leasing-title">NOW LEASING</div>
+    <div class="leasing-copy">
+      <div id="leasing-line-1"></div>
+      <div id="leasing-highlight"></div>
+      <div id="leasing-ideal-for-items"></div>
+    </div>
+  </div>
+
+  <div>
+    <div class="contact-name" id="contact-name"></div>
+    <div class="contact-info">
+      <div id="contact-phone"></div>
+      <div id="contact-email"></div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
 <div class="managed" id="managed">MANAGED BY</div>
 
 </div>
@@ -107,7 +190,7 @@ function parseCSV(text) {
   return rows;
 }
 
-/* LOAD DATA */
+/* LOAD */
 function load(){
  fetch(URL + "&t=" + Date.now())
  .then(r=>r.text())
@@ -117,7 +200,6 @@ function load(){
 
    for (let i = 1; i < rows.length; i++) {
      let row = rows[i];
-
      let key = row[1];
      let value = row[3];
 
@@ -127,26 +209,41 @@ function load(){
    }
 
    apply(data);
- })
- .catch(e=>{
-   console.log("ERROR:", e);
  });
 }
 
 /* APPLY */
 function apply(d){
 
+ // HEADER
  set("building-number", d.building_number);
  set("building-street", d.building_street);
  set("building-direction", d.building_direction);
+ set("city", d.city);
+
+ // LEASING
+ set("leasing-title", d.leasing_title);
+ set("leasing-line-1", d.leasing_line_1);
+ set("leasing-highlight", d.leasing_highlight);
+ set("leasing-ideal-for-items", d.leasing_ideal_for_items);
+
+ // CONTACT
+ set("contact-name", d.contact_name);
+ set("contact-phone", d.contact_phone);
+ set("contact-email", d.contact_email);
+
+ // FOOTER
  set("managed", d.managed_by_text);
 
+ // DIRECTORY
  let html="";
  for(let i=1;i<=3;i++){
   html+=`
    <div class="row">
     <div class="suite">${d["suite_"+i]||""}</div>
-    <div class="tenant">${d["tenant_"+i]||""}</div>
+    <div class="tenant">${d["tenant_"+i]||""}
+      <div class="sub">${(d["subtext_"+i]||"").replace("|","<br>")}</div>
+    </div>
    </div>`;
  }
 
