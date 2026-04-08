@@ -1,106 +1,268 @@
-<!-- ONLY SHOWING CHANGES — your JS + DATA PIPE STAYS EXACTLY THE SAME -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Directory</title>
 
 <style>
+html, body {
+  margin:0;
+  background:#000;
+  color:#fff;
+  font-family:Helvetica, Arial;
+  overflow:hidden;
+}
 
-/* 🔥 IMPROVED GOLD (more premium) */
+/* SCREEN */
+#screen {
+  width:2160px;
+  height:3840px;
+  position:relative;
+}
+
+/* GOLD */
 .gold-line {
-  background: linear-gradient(
-    90deg,
-    rgba(120,93,37,0.05) 0%,
-    rgba(184,145,67,0.9) 20%,
-    rgba(255,235,170,1) 50%,
-    rgba(184,145,67,0.9) 80%,
-    rgba(120,93,37,0.05) 100%
-  );
+  height:3px;
+  background:linear-gradient(90deg,#6e5320,#d9bd7a,#fff2b0,#d9bd7a,#6e5320);
 }
 
-/* 🔥 HEADER REFINEMENT */
-.title-line-1 {
-  font-size: 180px;
-  letter-spacing: 0.12em;
+/* HEADER */
+.header {
+  position:absolute;
+  top:120px;
+  left:140px;
+  right:140px;
 }
 
-.title-line-2 {
-  font-size: 88px;
-  letter-spacing: 0.26em;
+.title-line-1 { font-size:200px; font-weight:700; letter-spacing:.12em; }
+.title-line-2 { font-size:90px; letter-spacing:.28em; }
+.title-line-3 { font-size:60px; letter-spacing:.34em; opacity:.7; }
+
+.meta {
+  position:absolute;
+  right:0;
+  top:0;
+  text-align:right;
 }
 
-.title-line-3 {
-  font-size: 54px;
-  letter-spacing: 0.32em;
+.time { font-size:80px; }
+.city { font-size:34px; }
+
+/* DIRECTORY */
+.directory-shell {
+  position:absolute;
+  top:720px;
+  left:140px;
+  right:140px;
 }
 
-/* 🔥 DIRECTORY (clean luxury spacing) */
 .row {
-  padding: 56px 0;
-  border-bottom: 1px solid rgba(217,189,122,0.18);
+  padding:70px 0;
+  border-bottom:1px solid rgba(217,189,122,.25);
 }
 
 .suite {
-  font-size: 54px;
-  font-weight: 500;
-  letter-spacing: 0.20em;
+  font-size:64px;
+  letter-spacing:.20em;
+  color:#f1e3bb;
+  width:240px;
+  display:inline-block;
 }
 
 .tenant {
-  font-size: 70px;
-  font-weight: 300;
-  letter-spacing: 0.10em;
+  font-size:82px;
+  display:inline-block;
 }
 
 .sub {
-  font-size: 30px;
-  letter-spacing: 0.20em;
-  opacity: 0.7;
+  font-size:34px;
+  opacity:.7;
+  margin-top:10px;
 }
 
-/* 🔥 LEASING (more presence) */
+/* LEASING */
+.leasing-section {
+  position:absolute;
+  top:2500px;
+  left:140px;
+  right:140px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+}
+
 .leasing-title {
-  font-size: 64px;
-  letter-spacing: 0.28em;
+  font-size:70px;
+  color:#d9bd7a;
+  letter-spacing:.30em;
 }
 
 .leasing-copy {
-  font-size: 34px;
-  line-height: 1.6;
+  font-size:38px;
+  line-height:1.6;
 }
 
-.leasing-highlight {
-  font-size: 44px;
-}
+/* CONTACT */
+.contact-name { font-size:54px; }
+.contact-info { font-size:36px; }
 
-/* 🔥 CONTACT CARD */
-.contact-name {
-  font-size: 48px;
-  letter-spacing: 0.14em;
-}
-
-.contact-role {
-  font-size: 28px;
-}
-
-.contact-info {
-  font-size: 32px;
-}
-
-/* 🔥 QR */
+/* QR */
 .qr-code {
-  width: 180px;
-  height: 180px;
+  width:200px;
+  height:200px;
+  background:#fff;
+  padding:10px;
 }
 
-.qr-caption {
-  font-size: 22px;
-}
-
-/* 🔥 FOOTER (tightened spacing) */
+/* FOOTER */
 .managed {
-  bottom: 260px;
+  position:absolute;
+  bottom:260px;
+  width:100%;
+  text-align:center;
+  font-size:60px;
+  letter-spacing:.30em;
+  opacity:.7;
 }
-
-.managed-text {
-  font-size: 56px;
-  letter-spacing: 0.30em;
-}
-
 </style>
+</head>
+
+<body>
+
+<div id="screen">
+
+<!-- HEADER -->
+<div class="header">
+  <div>
+    <div class="title-line-1" id="building-number">110</div>
+    <div class="title-line-2" id="building-street">29TH AVENUE</div>
+    <div class="title-line-3" id="building-direction">NORTH</div>
+  </div>
+
+  <div class="meta">
+    <div class="time" id="time">--:--</div>
+    <div class="city" id="city">NASHVILLE TN</div>
+  </div>
+</div>
+
+<div class="gold-line" style="position:absolute; top:600px; left:140px; right:140px;"></div>
+
+<!-- DIRECTORY -->
+<div class="directory-shell" id="directory"></div>
+
+<!-- LEASING -->
+<div class="leasing-section">
+  <div>
+    <div class="leasing-title" id="leasing-title">NOW LEASING</div>
+    <div class="leasing-copy">
+      <div id="leasing-line-1"></div>
+      <div id="leasing-highlight"></div>
+      <div id="leasing-ideal-for-items"></div>
+    </div>
+  </div>
+
+  <div>
+    <div class="contact-name" id="contact-name"></div>
+    <div class="contact-info">
+      <div id="contact-phone"></div>
+      <div id="contact-email"></div>
+    </div>
+    <img id="qr" class="qr-code">
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="managed" id="managed">MANAGED BY</div>
+
+</div>
+
+<script>
+const URL = "https://docs.google.com/spreadsheets/d/1O_8s-4uoGnKGaWkPHQ2yYXStX1OVBjJsmK7DC3oYWJ4/export?format=csv";
+
+/* SAFE CSV */
+function parseCSV(text){
+  const rows=[]; let row=[]; let cell=""; let q=false;
+  for(let i=0;i<text.length;i++){
+    let c=text[i], n=text[i+1];
+    if(c=='"'){ if(q&&n=='"'){cell+='"';i++;} else q=!q;}
+    else if(c==','&&!q){row.push(cell);cell='';}
+    else if((c=='\n'||c=='\r')&&!q){row.push(cell);rows.push(row);row=[];cell='';}
+    else cell+=c;
+  }
+  return rows;
+}
+
+/* LOAD */
+function load(){
+ fetch(URL+"&t="+Date.now())
+ .then(r=>r.text())
+ .then(t=>{
+  let rows=parseCSV(t), d={};
+  for(let i=1;i<rows.length;i++){
+    let k=rows[i][1], v=rows[i][3];
+    if(k) d[k.trim()]=(v||"").trim();
+  }
+  apply(d);
+ });
+}
+
+/* APPLY */
+function apply(d){
+
+ set("building-number",d.building_number);
+ set("building-street",d.building_street);
+ set("building-direction",d.building_direction);
+ set("city",d.city);
+ set("managed",d.managed_by_text);
+
+ set("leasing-title",d.leasing_title);
+ set("leasing-line-1",d.leasing_line_1);
+ set("leasing-highlight",d.leasing_highlight);
+ set("leasing-ideal-for-items",d.leasing_ideal_for_items);
+
+ set("contact-name",d.contact_name);
+ set("contact-phone",d.contact_phone);
+ set("contact-email",d.contact_email);
+
+ // DIRECTORY
+ let html="";
+ for(let i=1;i<=3;i++){
+  html+=`
+   <div class="row">
+    <div class="suite">${d["suite_"+i]||""}</div>
+    <div class="tenant">${d["tenant_"+i]||""}
+      <div class="sub">${(d["subtext_"+i]||"").replace("|","<br>")}</div>
+    </div>
+   </div>`;
+ }
+ document.getElementById("directory").innerHTML=html;
+
+ // QR (FORCED)
+ let qrData = `${d.contact_name}\n${d.contact_phone}\n${d.contact_email}`;
+ document.getElementById("qr").src =
+   "https://api.qrserver.com/v1/create-qr-code/?size=300x300&data="+encodeURIComponent(qrData);
+}
+
+/* HELPERS */
+function set(id,val){
+ if(val) document.getElementById(id).innerHTML=val;
+}
+
+/* TIME */
+function time(){
+ let d=new Date();
+ let h=d.getHours()%12||12;
+ let m=("0"+d.getMinutes()).slice(-2);
+ let am=d.getHours()>=12?"PM":"AM";
+ document.getElementById("time").innerHTML=h+":"+m+" "+am;
+}
+
+/* INIT */
+setInterval(load,5000);
+setInterval(time,1000);
+
+load();
+time();
+</script>
+
+</body>
+</html>
