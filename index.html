@@ -6,132 +6,244 @@
 
 <style>
 html, body {
-  margin:0;
-  background:#000;
-  color:#fff;
-  font-family:Helvetica, Arial;
-  overflow:hidden;
+  margin: 0;
+  background: #000;
+  color: #fff;
+  font-family: Helvetica, Arial, sans-serif;
+  overflow: hidden;
 }
 
 /* SCREEN */
 #screen {
-  width:2160px;
-  height:3840px;
-  position:relative;
+  width: 2160px;
+  height: 3840px;
+  position: relative;
 }
 
 /* GOLD */
 .gold-line {
-  height:3px;
-  background:linear-gradient(90deg,#6e5320,#d9bd7a,#fff2b0,#d9bd7a,#6e5320);
+  height: 3px;
+  background: linear-gradient(90deg, #6e5320, #d9bd7a, #fff2b0, #d9bd7a, #6e5320);
 }
 
 /* HEADER */
 .header {
-  position:absolute;
-  top:120px;
-  left:140px;
-  right:140px;
+  position: absolute;
+  top: 120px;
+  left: 140px;
+  right: 140px;
 }
 
-.title-line-1 { font-size:200px; font-weight:700; letter-spacing:.12em; }
-.title-line-2 { font-size:90px; letter-spacing:.28em; }
-.title-line-3 { font-size:60px; letter-spacing:.34em; opacity:.7; }
+.title-line-1 {
+  font-size: 200px;
+  font-weight: 700;
+  letter-spacing: .12em;
+}
+
+.title-line-2 {
+  font-size: 90px;
+  letter-spacing: .28em;
+}
+
+.title-line-3 {
+  font-size: 60px;
+  letter-spacing: .34em;
+  opacity: .7;
+}
 
 .meta {
-  position:absolute;
-  right:0;
-  top:0;
-  text-align:right;
+  position: absolute;
+  right: 0;
+  top: 0;
+  text-align: right;
 }
 
-.time { font-size:80px; }
-.city { font-size:34px; }
+.time {
+  font-size: 80px;
+}
+
+.city {
+  font-size: 34px;
+}
 
 /* LOGO */
 .logo {
-  position:absolute;
-  top:-40px;
-  right:0;
-  height:120px;
-  opacity:0.95;
+  position: absolute;
+  top: -40px;
+  right: 0;
+  height: 120px;
+  opacity: 0.95;
+}
+
+/* DIRECTORY TITLE */
+.directory-title-wrap {
+  position: absolute;
+  top: 580px;
+  left: 140px;
+  right: 140px;
+  text-align: center;
+}
+
+.directory-title-line {
+  width: 460px;
+  margin: 0 auto 24px auto;
+}
+
+.directory-title {
+  font-size: 64px;
+  letter-spacing: .30em;
+  color: #d9bd7a;
+  text-transform: uppercase;
+  font-weight: 300;
 }
 
 /* DIRECTORY */
 .directory-shell {
-  position:absolute;
-  top:720px;
-  left:140px;
-  right:140px;
+  position: absolute;
+  top: 760px;
+  left: 140px;
+  right: 140px;
 }
 
 .row {
-  padding:70px 0;
-  border-bottom:1px solid rgba(217,189,122,.25);
+  padding: 70px 0;
+  border-bottom: 1px solid rgba(217,189,122,.25);
 }
 
 .suite {
-  font-size:68px;
-  letter-spacing:.20em;
-  color:#f1e3bb;
-  width:240px;
-  display:inline-block;
+  font-size: 68px;
+  letter-spacing: .20em;
+  color: #f1e3bb;
+  width: 240px;
+  display: inline-block;
+  vertical-align: top;
 }
 
 .tenant {
-  font-size:86px;
-  display:inline-block;
+  font-size: 86px;
+  display: inline-block;
+  vertical-align: top;
 }
 
 .sub {
-  font-size:36px;
-  opacity:.7;
-  margin-top:10px;
+  font-size: 36px;
+  opacity: .7;
+  margin-top: 10px;
+  line-height: 1.35;
 }
 
 /* LEASING */
 .leasing-section {
-  position:absolute;
-  top:2500px;
-  left:140px;
-  right:140px;
-  display:grid;
-  grid-template-columns:1fr 1fr;
+  position: absolute;
+  top: 2480px;
+  left: 140px;
+  right: 140px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 140px;
+  align-items: start;
 }
 
 .leasing-title {
-  font-size:70px;
-  color:#d9bd7a;
-  letter-spacing:.30em;
+  font-size: 82px;
+  color: #d9bd7a;
+  letter-spacing: .24em;
+  text-transform: uppercase;
+  margin-bottom: 32px;
+  font-weight: 500;
 }
 
 .leasing-copy {
-  font-size:38px;
-  line-height:1.6;
+  font-size: 48px;
+  line-height: 1.6;
+  text-transform: uppercase;
 }
 
-/* CONTACT */
-.contact-name { font-size:58px; }
-.contact-info { font-size:38px; }
+.leasing-copy div {
+  margin-bottom: 14px;
+}
 
-/* QR */
+.leasing-highlight {
+  font-size: 58px;
+  font-weight: 500;
+}
+
+.contact-lead {
+  font-size: 34px;
+  color: #d9bd7a;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+.contact-name {
+  font-size: 70px;
+  font-weight: 600;
+  line-height: 1.1;
+  margin-bottom: 18px;
+  text-transform: uppercase;
+}
+
+.contact-title {
+  font-size: 40px;
+  line-height: 1.35;
+  margin-bottom: 22px;
+  text-transform: uppercase;
+  opacity: .85;
+}
+
+.contact-info {
+  font-size: 44px;
+  line-height: 1.45;
+  margin-bottom: 24px;
+}
+
+.qr-wrap {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  column-gap: 24px;
+  align-items: center;
+  margin-top: 20px;
+}
+
 .qr-code {
-  width:200px;
-  height:200px;
-  background:#fff;
-  padding:10px;
-  margin-top:20px;
+  width: 220px;
+  height: 220px;
+  background: #fff;
+  padding: 10px;
+  display: block;
+}
+
+.qr-caption {
+  font-size: 28px;
+  line-height: 1.45;
+  text-transform: uppercase;
+  letter-spacing: .14em;
 }
 
 /* FOOTER */
+.footer-accent {
+  position: absolute;
+  bottom: 560px;
+  left: 140px;
+  right: 140px;
+}
+
 .managed {
-  position:absolute;
-  bottom:420px;
-  width:100%;
-  text-align:center;
-  font-size:64px;
-  letter-spacing:.32em;
-  opacity:.85;
+  position: absolute;
+  bottom: 340px;
+  left: 140px;
+  right: 140px;
+  text-align: center;
+}
+
+.managed-text {
+  font-size: 64px;
+  letter-spacing: .18em;
+  line-height: 1.35;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.86);
+  font-family: "Perpetua Titling MT", "Perpetua", "Times New Roman", serif;
 }
 </style>
 </head>
@@ -140,56 +252,67 @@ html, body {
 
 <div id="screen">
 
-<!-- HEADER -->
-<div class="header">
-  <div>
-    <div class="title-line-1" id="building-number">110</div>
-    <div class="title-line-2" id="building-street">29TH AVENUE</div>
-    <div class="title-line-3" id="building-direction">NORTH</div>
+  <!-- HEADER -->
+  <div class="header">
+    <div>
+      <div class="title-line-1" id="building-number">110</div>
+      <div class="title-line-2" id="building-street">29TH AVENUE</div>
+      <div class="title-line-3" id="building-direction">NORTH</div>
+    </div>
+
+    <div class="meta">
+      <div class="time" id="time">--:--</div>
+      <div class="city" id="city">NASHVILLE TN</div>
+    </div>
+
+    <img src="Sagemont_Logo.png" class="logo" alt="Sagemont logo">
   </div>
 
-  <div class="meta">
-    <div class="time" id="time">--:--</div>
-    <div class="city" id="city">NASHVILLE TN</div>
+  <!-- DIRECTORY TITLE -->
+  <div class="directory-title-wrap">
+    <div class="gold-line directory-title-line"></div>
+    <div class="directory-title" id="directory-title">BUILDING DIRECTORY</div>
   </div>
 
-  <!-- LOGO -->
-  <img src="Sagemont_Logo.png" class="logo">
-</div>
+  <!-- DIRECTORY -->
+  <div class="directory-shell" id="directory"></div>
 
-<div class="gold-line" style="position:absolute; top:600px; left:140px; right:140px;"></div>
+  <!-- LEASING -->
+  <div class="leasing-section">
+    <div>
+      <div class="leasing-title" id="leasing-title">NOW LEASING</div>
+      <div class="leasing-copy">
+        <div id="leasing-line-1">RENOVATED SUITES AVAILABLE</div>
+        <div class="leasing-highlight" id="leasing-highlight">1,500 - 7,000 SF</div>
+        <div id="leasing-ideal-for-label">IDEAL FOR:</div>
+        <div id="leasing-ideal-for-items">MEDICAL AESTHETICS PROFESSIONAL</div>
+        <div id="leasing-scan-line-1">SCAN TO LEARN MORE</div>
+        <div id="leasing-scan-line-2">ABOUT AVAILABLE SUITES</div>
+      </div>
+    </div>
 
-<!-- DIRECTORY -->
-<div class="directory-shell" id="directory"></div>
+    <div>
+      <div class="contact-lead" id="contact-section-title">PLEASE CONTACT</div>
+      <div class="contact-name" id="contact-name">CARLA BACA</div>
+      <div class="contact-title" id="contact-role">MEDICAL OFFICE SPECIALIST</div>
+      <div class="contact-info">
+        <div id="contact-phone">(636) 236-8876</div>
+        <div id="contact-email">cbaca@sagemontre.com</div>
+      </div>
 
-<!-- LEASING -->
-<div class="leasing-section">
-  <div>
-    <div class="leasing-title" id="leasing-title">NOW LEASING</div>
-    <div class="leasing-copy">
-      <div id="leasing-line-1"></div>
-      <div id="leasing-highlight"></div>
-      <div id="leasing-ideal-for-items"></div>
+      <div class="qr-wrap">
+        <img src="110-qr.jpg" class="qr-code" id="qr-image" alt="QR code">
+        <div class="qr-caption" id="contact-qr-text">SCAN TO SAVE CONTACT DETAILS</div>
+      </div>
     </div>
   </div>
 
-  <div>
-    <div class="contact-name" id="contact-name"></div>
-    <div class="contact-info">
-      <div id="contact-phone"></div>
-      <div id="contact-email"></div>
-    </div>
+  <!-- FOOTER -->
+  <div class="footer-accent gold-line"></div>
 
-    <!-- REAL QR -->
-    <img src="110-qr.jpg" class="qr-code">
+  <div class="managed">
+    <div class="managed-text" id="managed">PROFESSIONALLY MANAGED BY EDWIN B. RASKIN COMPANY SINCE 1954</div>
   </div>
-</div>
-
-<!-- GOLD ABOVE FOOTER -->
-<div class="gold-line" style="position:absolute; bottom:520px; left:140px; right:140px;"></div>
-
-<!-- FOOTER -->
-<div class="managed" id="managed">MANAGED BY EDWIN B. RASKIN COMPANY</div>
 
 </div>
 
@@ -201,76 +324,97 @@ function parseCSV(text){
   const rows=[]; let row=[]; let cell=""; let q=false;
   for(let i=0;i<text.length;i++){
     let c=text[i], n=text[i+1];
-    if(c=='"'){ if(q&&n=='"'){cell+='"';i++;} else q=!q;}
-    else if(c==','&&!q){row.push(cell);cell='';}
-    else if((c=='\n'||c=='\r')&&!q){row.push(cell);rows.push(row);row=[];cell='';}
-    else cell+=c;
+    if(c=='"'){
+      if(q&&n=='"'){cell+='"';i++;}
+      else q=!q;
+    } else if(c==','&&!q){
+      row.push(cell); cell='';
+    } else if((c=='\n'||c=='\r')&&!q){
+      if(cell!=='' || row.length){
+        row.push(cell);
+        rows.push(row);
+        row=[]; cell='';
+      }
+    } else {
+      cell+=c;
+    }
+  }
+  if(cell!=='' || row.length){
+    row.push(cell);
+    rows.push(row);
   }
   return rows;
 }
 
 /* LOAD */
 function load(){
- fetch(URL+"&t="+Date.now())
- .then(r=>r.text())
- .then(t=>{
-  let rows=parseCSV(t), d={};
-  for(let i=1;i<rows.length;i++){
-    let k=rows[i][1], v=rows[i][3];
-    if(k) d[k.trim()]=(v||"").trim();
-  }
-  apply(d);
- });
+  fetch(URL + "&t=" + Date.now())
+    .then(r=>r.text())
+    .then(t=>{
+      let rows=parseCSV(t), d={};
+      for(let i=1;i<rows.length;i++){
+        let k=rows[i][1], v=rows[i][3];
+        if(k) d[k.trim()] = (v || "").trim();
+      }
+      apply(d);
+    });
 }
 
 /* APPLY */
 function apply(d){
+  set("building-number", d.building_number);
+  set("building-street", d.building_street);
+  set("building-direction", d.building_direction);
+  set("city", d.city);
+  set("directory-title", d.directory_title);
 
- set("building-number",d.building_number);
- set("building-street",d.building_street);
- set("building-direction",d.building_direction);
- set("city",d.city);
- set("managed",d.managed_by_text);
+  set("leasing-title", d.leasing_title);
+  set("leasing-line-1", d.leasing_line_1);
+  set("leasing-highlight", d.leasing_highlight);
+  set("leasing-ideal-for-label", d.leasing_ideal_for_label);
+  set("leasing-ideal-for-items", d.leasing_ideal_for_items);
+  set("leasing-scan-line-1", d.leasing_scan_line_1);
+  set("leasing-scan-line-2", d.leasing_scan_line_2);
 
- set("leasing-title",d.leasing_title);
- set("leasing-line-1",d.leasing_line_1);
- set("leasing-highlight",d.leasing_highlight);
- set("leasing-ideal-for-items",d.leasing_ideal_for_items);
+  set("contact-section-title", d.contact_section_title);
+  set("contact-name", d.contact_name);
+  set("contact-role", d.contact_title);
+  set("contact-phone", d.contact_phone);
+  set("contact-email", d.contact_email);
+  set("contact-qr-text", d.contact_qr_text);
 
- set("contact-name",d.contact_name);
- set("contact-phone",d.contact_phone);
- set("contact-email",d.contact_email);
+  set("managed", d.managed_by_text);
 
- let html="";
- for(let i=1;i<=3;i++){
-  html+=`
-   <div class="row">
-    <div class="suite">${d["suite_"+i]||""}</div>
-    <div class="tenant">${d["tenant_"+i]||""}
-      <div class="sub">${(d["subtext_"+i]||"").replace("|","<br>")}</div>
-    </div>
-   </div>`;
- }
- document.getElementById("directory").innerHTML=html;
+  let html="";
+  for(let i=1;i<=3;i++){
+    html += `
+      <div class="row">
+        <div class="suite">${d["suite_"+i] || ""}</div>
+        <div class="tenant">${d["tenant_"+i] || ""}
+          <div class="sub">${(d["subtext_"+i] || "").replaceAll("|","<br>")}</div>
+        </div>
+      </div>`;
+  }
+  document.getElementById("directory").innerHTML = html;
 }
 
 /* HELPERS */
 function set(id,val){
- if(val) document.getElementById(id).innerHTML=val;
+  if(val) document.getElementById(id).innerHTML = val;
 }
 
 /* TIME */
 function time(){
- let d=new Date();
- let h=d.getHours()%12||12;
- let m=("0"+d.getMinutes()).slice(-2);
- let am=d.getHours()>=12?"PM":"AM";
- document.getElementById("time").innerHTML=h+":"+m+" "+am;
+  let d=new Date();
+  let h=d.getHours()%12||12;
+  let m=("0"+d.getMinutes()).slice(-2);
+  let am=d.getHours()>=12?"PM":"AM";
+  document.getElementById("time").innerHTML = h + ":" + m + " " + am;
 }
 
 /* INIT */
-setInterval(load,5000);
-setInterval(time,1000);
+setInterval(load, 5000);
+setInterval(time, 1000);
 
 load();
 time();
