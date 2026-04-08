@@ -1,276 +1,106 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Directory</title>
+<!-- ONLY SHOWING CHANGES — your JS + DATA PIPE STAYS EXACTLY THE SAME -->
 
 <style>
-html, body {
-  margin:0;
-  background:#000;
-  color:#fff;
-  font-family:Helvetica, Arial;
-  overflow:hidden;
+
+/* 🔥 IMPROVED GOLD (more premium) */
+.gold-line {
+  background: linear-gradient(
+    90deg,
+    rgba(120,93,37,0.05) 0%,
+    rgba(184,145,67,0.9) 20%,
+    rgba(255,235,170,1) 50%,
+    rgba(184,145,67,0.9) 80%,
+    rgba(120,93,37,0.05) 100%
+  );
 }
 
-/* 4K PORTRAIT */
-#screen {
-  width:2160px;
-  height:3840px;
-  position:relative;
+/* 🔥 HEADER REFINEMENT */
+.title-line-1 {
+  font-size: 180px;
+  letter-spacing: 0.12em;
 }
 
-/* HEADER */
-.header {
-  position:absolute;
-  top:120px;
-  left:140px;
-  right:140px;
+.title-line-2 {
+  font-size: 88px;
+  letter-spacing: 0.26em;
 }
 
-.title-line-1 { font-size:170px; font-weight:700; }
-.title-line-2 { font-size:82px; }
-.title-line-3 { font-size:52px; opacity:.7; }
-
-.meta {
-  position:absolute;
-  right:0;
-  top:0;
-  text-align:right;
+.title-line-3 {
+  font-size: 54px;
+  letter-spacing: 0.32em;
 }
 
-.time { font-size:76px; }
-.city { font-size:28px; }
-
-/* DIRECTORY */
-.directory-shell {
-  position:absolute;
-  top:720px;
-  left:140px;
-  right:140px;
-}
-
+/* 🔥 DIRECTORY (clean luxury spacing) */
 .row {
-  padding:42px 0;
-  border-bottom:1px solid rgba(255,255,255,.2);
+  padding: 56px 0;
+  border-bottom: 1px solid rgba(217,189,122,0.18);
 }
 
 .suite {
-  font-size:34px;
-  display:inline-block;
-  width:200px;
+  font-size: 54px;
+  font-weight: 500;
+  letter-spacing: 0.20em;
 }
 
 .tenant {
-  font-size:46px;
-  display:inline-block;
+  font-size: 70px;
+  font-weight: 300;
+  letter-spacing: 0.10em;
 }
 
 .sub {
-  font-size:24px;
-  opacity:.7;
+  font-size: 30px;
+  letter-spacing: 0.20em;
+  opacity: 0.7;
 }
 
-/* LEASING SECTION */
-.leasing-section {
-  position:absolute;
-  top:2600px;
-  left:140px;
-  right:140px;
-  display:grid;
-  grid-template-columns:1fr 1fr;
+/* 🔥 LEASING (more presence) */
+.leasing-title {
+  font-size: 64px;
+  letter-spacing: 0.28em;
 }
 
-.leasing-title { font-size:48px; }
-.leasing-copy { font-size:28px; }
+.leasing-copy {
+  font-size: 34px;
+  line-height: 1.6;
+}
 
-/* CONTACT */
-.contact-name { font-size:34px; }
-.contact-info { font-size:24px; }
+.leasing-highlight {
+  font-size: 44px;
+}
 
-/* FOOTER */
+/* 🔥 CONTACT CARD */
+.contact-name {
+  font-size: 48px;
+  letter-spacing: 0.14em;
+}
+
+.contact-role {
+  font-size: 28px;
+}
+
+.contact-info {
+  font-size: 32px;
+}
+
+/* 🔥 QR */
+.qr-code {
+  width: 180px;
+  height: 180px;
+}
+
+.qr-caption {
+  font-size: 22px;
+}
+
+/* 🔥 FOOTER (tightened spacing) */
 .managed {
-  position:absolute;
-  bottom:180px;
-  width:100%;
-  text-align:center;
-  font-size:52px;
-  opacity:.7;
+  bottom: 260px;
 }
+
+.managed-text {
+  font-size: 56px;
+  letter-spacing: 0.30em;
+}
+
 </style>
-</head>
-
-<body>
-
-<div id="screen">
-
-<!-- HEADER -->
-<div class="header">
-  <div>
-    <div class="title-line-1" id="building-number">110</div>
-    <div class="title-line-2" id="building-street">29TH AVENUE</div>
-    <div class="title-line-3" id="building-direction">NORTH</div>
-  </div>
-
-  <div class="meta">
-    <div class="time" id="time">--:--</div>
-    <div class="city" id="city">NASHVILLE TN</div>
-  </div>
-</div>
-
-<!-- DIRECTORY -->
-<div class="directory-shell" id="directory"></div>
-
-<!-- LEASING -->
-<div class="leasing-section">
-  <div>
-    <div class="leasing-title" id="leasing-title">NOW LEASING</div>
-    <div class="leasing-copy">
-      <div id="leasing-line-1"></div>
-      <div id="leasing-highlight"></div>
-      <div id="leasing-ideal-for-items"></div>
-    </div>
-  </div>
-
-  <div>
-    <div class="contact-name" id="contact-name"></div>
-    <div class="contact-info">
-      <div id="contact-phone"></div>
-      <div id="contact-email"></div>
-    </div>
-  </div>
-</div>
-
-<!-- FOOTER -->
-<div class="managed" id="managed">MANAGED BY</div>
-
-</div>
-
-<script>
-const URL = "https://docs.google.com/spreadsheets/d/1O_8s-4uoGnKGaWkPHQ2yYXStX1OVBjJsmK7DC3oYWJ4/export?format=csv";
-
-/* SAFE CSV PARSER */
-function parseCSV(text) {
-  const rows = [];
-  let row = [];
-  let cell = '';
-  let inQuotes = false;
-
-  for (let i = 0; i < text.length; i++) {
-    let char = text[i];
-    let next = text[i + 1];
-
-    if (char === '"') {
-      if (inQuotes && next === '"') {
-        cell += '"';
-        i++;
-      } else {
-        inQuotes = !inQuotes;
-      }
-    } else if (char === ',' && !inQuotes) {
-      row.push(cell);
-      cell = '';
-    } else if ((char === '\n' || char === '\r') && !inQuotes) {
-      if (cell || row.length) {
-        row.push(cell);
-        rows.push(row);
-        row = [];
-        cell = '';
-      }
-    } else {
-      cell += char;
-    }
-  }
-
-  if (cell || row.length) {
-    row.push(cell);
-    rows.push(row);
-  }
-
-  return rows;
-}
-
-/* LOAD */
-function load(){
- fetch(URL + "&t=" + Date.now())
- .then(r=>r.text())
- .then(t=>{
-   const rows = parseCSV(t);
-   let data = {};
-
-   for (let i = 1; i < rows.length; i++) {
-     let row = rows[i];
-     let key = row[1];
-     let value = row[3];
-
-     if(key){
-       data[key.trim()] = (value || "").trim();
-     }
-   }
-
-   apply(data);
- });
-}
-
-/* APPLY */
-function apply(d){
-
- // HEADER
- set("building-number", d.building_number);
- set("building-street", d.building_street);
- set("building-direction", d.building_direction);
- set("city", d.city);
-
- // LEASING
- set("leasing-title", d.leasing_title);
- set("leasing-line-1", d.leasing_line_1);
- set("leasing-highlight", d.leasing_highlight);
- set("leasing-ideal-for-items", d.leasing_ideal_for_items);
-
- // CONTACT
- set("contact-name", d.contact_name);
- set("contact-phone", d.contact_phone);
- set("contact-email", d.contact_email);
-
- // FOOTER
- set("managed", d.managed_by_text);
-
- // DIRECTORY
- let html="";
- for(let i=1;i<=3;i++){
-  html+=`
-   <div class="row">
-    <div class="suite">${d["suite_"+i]||""}</div>
-    <div class="tenant">${d["tenant_"+i]||""}
-      <div class="sub">${(d["subtext_"+i]||"").replace("|","<br>")}</div>
-    </div>
-   </div>`;
- }
-
- document.getElementById("directory").innerHTML = html;
-}
-
-/* HELPERS */
-function set(id,val){
- if(val) document.getElementById(id).innerHTML = val;
-}
-
-/* TIME */
-function updateTime(){
- let d=new Date();
- let h=d.getHours()%12||12;
- let m=("0"+d.getMinutes()).slice(-2);
- let am=d.getHours()>=12?"PM":"AM";
- document.getElementById("time").innerHTML=h+":"+m+" "+am;
-}
-
-/* INIT */
-setInterval(load,5000);
-setInterval(updateTime,1000);
-
-load();
-updateTime();
-</script>
-
-</body>
-</html>
