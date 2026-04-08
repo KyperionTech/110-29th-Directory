@@ -1,8 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Directory</title>
 
 <style>
@@ -10,8 +9,7 @@ html, body {
   margin:0;
   background:#000;
   color:#fff;
-  font-family:Helvetica, Arial, sans-serif;
-  overflow:hidden;
+  font-family:Helvetica, Arial;
 }
 
 #screen {
@@ -20,42 +18,24 @@ html, body {
   position:relative;
 }
 
-/* HEADER */
 .header {position:absolute; top:120px; left:140px; right:140px;}
-.title-line-1 {font-size:170px; font-weight:700;}
-.title-line-2 {font-size:82px;}
-.title-line-3 {font-size:52px; opacity:.7;}
-
 .meta {position:absolute; right:0; top:0; text-align:right;}
+
 .time {font-size:76px;}
 .city {font-size:28px;}
-.weather {font-size:24px;}
 
-/* DIRECTORY */
 .directory-shell {position:absolute; top:720px; left:140px; right:140px;}
-.row {padding:42px 0; border-bottom:1px solid rgba(255,255,255,.2);}
+
+.row {padding:40px 0; border-bottom:1px solid rgba(255,255,255,.2);}
 .suite {font-size:34px;}
 .tenant {font-size:46px;}
-.sub {font-size:24px; opacity:.7;}
 
-/* LEASING */
-.leasing-section {
-  position:absolute;
-  top:2800px;
-  left:140px;
-  right:140px;
-  display:grid;
-  grid-template-columns:1fr 1fr;
-}
-
-/* FOOTER */
 .managed {
   position:absolute;
   bottom:180px;
   width:100%;
   text-align:center;
   font-size:52px;
-  opacity:.7;
 }
 </style>
 </head>
@@ -66,106 +46,114 @@ html, body {
 
 <div class="header">
   <div>
-    <div class="title-line-1" id="building-number">110</div>
-    <div class="title-line-2" id="building-street">29TH AVENUE</div>
-    <div class="title-line-3" id="building-direction">NORTH</div>
+    <div id="building-number">110</div>
+    <div id="building-street">29TH AVENUE</div>
+    <div id="building-direction">NORTH</div>
   </div>
 
   <div class="meta">
-    <div class="time" id="time">--:--</div>
-    <div class="city" id="city">NASHVILLE TN</div>
-    <div class="weather" id="weather">--</div>
+    <div id="time">--:--</div>
+    <div id="city">NASHVILLE TN</div>
   </div>
 </div>
 
-<div class="directory-shell" id="directory-list"></div>
+<div class="directory-shell" id="directory"></div>
 
-<div class="leasing-section">
-  <div>
-    <div id="leasing-title">NOW LEASING</div>
-    <div id="leasing-line-1"></div>
-    <div id="leasing-highlight"></div>
-    <div id="leasing-ideal-for-items"></div>
-  </div>
-
-  <div>
-    <div id="contact-name"></div>
-    <div id="contact-phone"></div>
-    <div id="contact-email"></div>
-  </div>
-</div>
-
-<div class="managed" id="managed-by-text">MANAGED BY</div>
+<div class="managed" id="managed">MANAGED BY</div>
 
 </div>
 
 <script>
 const URL = "https://docs.google.com/spreadsheets/d/1O_8s-4uoGnKGaWkPHQ2yYXStX1OVBjJsmK7DC3oYWJ4/export?format=csv";
 
-/* LOAD SHEET */
+/* SAFE CSV PARSER */
+function parseCSV(text) {
+  const rows = [];
+  let row = [];
+  let cell = '';
+  let inQuotes = false;
+
+  for (let i = 0; i < text.length; i++) {
+    let char = text[i];
+    let next = text[i + 1];
+
+    if (char === '"') {
+      if (inQuotes && next === '"') {
+        cell += '"';
+        i++;
+      } else {
+        inQuotes = !inQuotes;
+      }
+    } else if (char === ',' && !inQuotes) {
+      row.push(cell);
+      cell = '';
+    } else if ((char === '\n' || char === '\r') && !inQuotes) {
+      if (cell || row.length) {
+        row.push(cell);
+        rows.push(row);
+        row = [];
+        cell = '';
+      }
+    } else {
+      cell += char;
+    }
+  }
+
+  if (cell || row.length) {
+    row.push(cell);
+    rows.push(row);
+  }
+
+  return rows;
+}
+
+/* LOAD DATA */
 function load(){
  fetch(URL + "&t=" + Date.now())
  .then(r=>r.text())
  .then(t=>{
-   let lines = t.split("\n");
+   const rows = parseCSV(t);
    let data = {};
 
-   for(let i=1;i<lines.length;i++){
-     let row = lines[i].split(",");
+   for (let i = 1; i < rows.length; i++) {
+     let row = rows[i];
 
      let key = row[1];
      let value = row[3];
 
      if(key){
-       key = key.replace(/"/g,'').trim();
-       value = (value || "").replace(/"/g,'').trim();
-       data[key] = value;
+       data[key.trim()] = (value || "").trim();
      }
    }
 
    apply(data);
+ })
+ .catch(e=>{
+   console.log("ERROR:", e);
  });
 }
 
-/* APPLY DATA */
+/* APPLY */
 function apply(d){
 
- // HEADER
  set("building-number", d.building_number);
  set("building-street", d.building_street);
  set("building-direction", d.building_direction);
- set("city", d.city);
+ set("managed", d.managed_by_text);
 
- // LEASING
- set("leasing-title", d.leasing_title);
- set("leasing-line-1", d.leasing_line_1);
- set("leasing-highlight", d.leasing_highlight);
- set("leasing-ideal-for-items", d.leasing_ideal_for_items);
-
- // CONTACT
- set("contact-name", d.contact_name);
- set("contact-phone", d.contact_phone);
- set("contact-email", d.contact_email);
-
- // FOOTER
- set("managed-by-text", d.managed_by_text);
-
- // DIRECTORY
  let html="";
  for(let i=1;i<=3;i++){
   html+=`
    <div class="row">
     <div class="suite">${d["suite_"+i]||""}</div>
-    <div class="tenant">${d["tenant_"+i]||""}
-      <div class="sub">${(d["subtext_"+i]||"").replace("|","<br>")}</div>
-    </div>
+    <div class="tenant">${d["tenant_"+i]||""}</div>
    </div>`;
  }
 
- document.getElementById("directory-list").innerHTML = html;
+ document.getElementById("directory").innerHTML = html;
 }
 
-/* SET HELPER */
+/* HELPERS */
 function set(id,val){
  if(val) document.getElementById(id).innerHTML = val;
 }
