@@ -48,6 +48,15 @@ html, body {
 .time { font-size:80px; }
 .city { font-size:34px; }
 
+/* LOGO */
+.logo {
+  position:absolute;
+  top:-40px;
+  right:0;
+  height:120px;
+  opacity:0.95;
+}
+
 /* DIRECTORY */
 .directory-shell {
   position:absolute;
@@ -62,7 +71,7 @@ html, body {
 }
 
 .suite {
-  font-size:64px;
+  font-size:68px;
   letter-spacing:.20em;
   color:#f1e3bb;
   width:240px;
@@ -70,12 +79,12 @@ html, body {
 }
 
 .tenant {
-  font-size:82px;
+  font-size:86px;
   display:inline-block;
 }
 
 .sub {
-  font-size:34px;
+  font-size:36px;
   opacity:.7;
   margin-top:10px;
 }
@@ -102,8 +111,8 @@ html, body {
 }
 
 /* CONTACT */
-.contact-name { font-size:54px; }
-.contact-info { font-size:36px; }
+.contact-name { font-size:58px; }
+.contact-info { font-size:38px; }
 
 /* QR */
 .qr-code {
@@ -111,17 +120,18 @@ html, body {
   height:200px;
   background:#fff;
   padding:10px;
+  margin-top:20px;
 }
 
 /* FOOTER */
 .managed {
   position:absolute;
-  bottom:260px;
+  bottom:420px;
   width:100%;
   text-align:center;
-  font-size:60px;
-  letter-spacing:.30em;
-  opacity:.7;
+  font-size:64px;
+  letter-spacing:.32em;
+  opacity:.85;
 }
 </style>
 </head>
@@ -142,6 +152,9 @@ html, body {
     <div class="time" id="time">--:--</div>
     <div class="city" id="city">NASHVILLE TN</div>
   </div>
+
+  <!-- LOGO -->
+  <img src="Sagemont_Logo.png" class="logo">
 </div>
 
 <div class="gold-line" style="position:absolute; top:600px; left:140px; right:140px;"></div>
@@ -166,12 +179,17 @@ html, body {
       <div id="contact-phone"></div>
       <div id="contact-email"></div>
     </div>
-    <img id="qr" class="qr-code">
+
+    <!-- REAL QR -->
+    <img src="110-qr.jpg" class="qr-code">
   </div>
 </div>
 
+<!-- GOLD ABOVE FOOTER -->
+<div class="gold-line" style="position:absolute; bottom:520px; left:140px; right:140px;"></div>
+
 <!-- FOOTER -->
-<div class="managed" id="managed">MANAGED BY</div>
+<div class="managed" id="managed">MANAGED BY EDWIN B. RASKIN COMPANY</div>
 
 </div>
 
@@ -223,7 +241,6 @@ function apply(d){
  set("contact-phone",d.contact_phone);
  set("contact-email",d.contact_email);
 
- // DIRECTORY
  let html="";
  for(let i=1;i<=3;i++){
   html+=`
@@ -235,11 +252,6 @@ function apply(d){
    </div>`;
  }
  document.getElementById("directory").innerHTML=html;
-
- // QR (FORCED)
- let qrData = `${d.contact_name}\n${d.contact_phone}\n${d.contact_email}`;
- document.getElementById("qr").src =
-   "https://api.qrserver.com/v1/create-qr-code/?size=300x300&data="+encodeURIComponent(qrData);
 }
 
 /* HELPERS */
