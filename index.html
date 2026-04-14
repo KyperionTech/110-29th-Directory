@@ -11,13 +11,26 @@ html, body {
   color: #fff;
   font-family: Helvetica, Arial, sans-serif;
   overflow: hidden;
+  width: 100%;
+  height: 100%;
 }
 
-/* SCREEN */
+#viewport {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+  background: #000;
+}
+
 #screen {
   width: 2160px;
   height: 3840px;
-  position: relative;
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: #000;
+  transform-origin: top left;
 }
 
 /* GOLD */
@@ -250,76 +263,85 @@ html, body {
 
 <body>
 
-<div id="screen">
+<div id="viewport">
+  <div id="screen">
 
-  <!-- HEADER -->
-  <div class="header">
-    <div>
-      <div class="title-line-1" id="building-number">110</div>
-      <div class="title-line-2" id="building-street">29TH AVENUE</div>
-      <div class="title-line-3" id="building-direction">NORTH</div>
+    <div class="header">
+      <div>
+        <div class="title-line-1" id="building-number">110</div>
+        <div class="title-line-2" id="building-street">29TH AVENUE</div>
+        <div class="title-line-3" id="building-direction">NORTH</div>
+      </div>
+
+      <div class="meta">
+        <div class="time" id="time">--:--</div>
+        <div class="city" id="city">NASHVILLE TN</div>
+      </div>
+
+      <img src="Sagemont_Logo.png" class="logo" alt="Sagemont logo">
     </div>
 
-    <div class="meta">
-      <div class="time" id="time">--:--</div>
-      <div class="city" id="city">NASHVILLE TN</div>
+    <div class="directory-title-wrap">
+      <div class="gold-line directory-title-line"></div>
+      <div class="directory-title" id="directory-title">BUILDING DIRECTORY</div>
     </div>
 
-    <img src="Sagemont_Logo.png" class="logo" alt="Sagemont logo">
-  </div>
+    <div class="directory-shell" id="directory"></div>
 
-  <!-- DIRECTORY TITLE -->
-  <div class="directory-title-wrap">
-    <div class="gold-line directory-title-line"></div>
-    <div class="directory-title" id="directory-title">BUILDING DIRECTORY</div>
-  </div>
+    <div class="leasing-section">
+      <div>
+        <div class="leasing-title" id="leasing-title">NOW LEASING</div>
+        <div class="leasing-copy">
+          <div id="leasing-line-1">RENOVATED SUITES AVAILABLE</div>
+          <div class="leasing-highlight" id="leasing-highlight">1,500 - 7,000 SF</div>
+          <div id="leasing-ideal-for-label">IDEAL FOR:</div>
+          <div id="leasing-ideal-for-items">MEDICAL AESTHETICS PROFESSIONAL</div>
+          <div id="leasing-scan-line-1">SCAN TO LEARN MORE</div>
+          <div id="leasing-scan-line-2">ABOUT AVAILABLE SUITES</div>
+        </div>
+      </div>
 
-  <!-- DIRECTORY -->
-  <div class="directory-shell" id="directory"></div>
+      <div>
+        <div class="contact-lead" id="contact-section-title">PLEASE CONTACT</div>
+        <div class="contact-name" id="contact-name">CARLA BACA</div>
+        <div class="contact-title" id="contact-role">MEDICAL OFFICE SPECIALIST</div>
+        <div class="contact-info">
+          <div id="contact-phone">(636) 236-8876</div>
+          <div id="contact-email">cbaca@sagemontre.com</div>
+        </div>
 
-  <!-- LEASING -->
-  <div class="leasing-section">
-    <div>
-      <div class="leasing-title" id="leasing-title">NOW LEASING</div>
-      <div class="leasing-copy">
-        <div id="leasing-line-1">RENOVATED SUITES AVAILABLE</div>
-        <div class="leasing-highlight" id="leasing-highlight">1,500 - 7,000 SF</div>
-        <div id="leasing-ideal-for-label">IDEAL FOR:</div>
-        <div id="leasing-ideal-for-items">MEDICAL AESTHETICS PROFESSIONAL</div>
-        <div id="leasing-scan-line-1">SCAN TO LEARN MORE</div>
-        <div id="leasing-scan-line-2">ABOUT AVAILABLE SUITES</div>
+        <div class="qr-wrap">
+          <img src="110-qr.jpg" class="qr-code" id="qr-image" alt="QR code">
+          <div class="qr-caption" id="contact-qr-text">SCAN TO SAVE CONTACT DETAILS</div>
+        </div>
       </div>
     </div>
 
-    <div>
-      <div class="contact-lead" id="contact-section-title">PLEASE CONTACT</div>
-      <div class="contact-name" id="contact-name">CARLA BACA</div>
-      <div class="contact-title" id="contact-role">MEDICAL OFFICE SPECIALIST</div>
-      <div class="contact-info">
-        <div id="contact-phone">(636) 236-8876</div>
-        <div id="contact-email">cbaca@sagemontre.com</div>
-      </div>
+    <div class="footer-accent gold-line"></div>
 
-      <div class="qr-wrap">
-        <img src="110-qr.jpg" class="qr-code" id="qr-image" alt="QR code">
-        <div class="qr-caption" id="contact-qr-text">SCAN TO SAVE CONTACT DETAILS</div>
-      </div>
+    <div class="managed">
+      <div class="managed-text" id="managed">PROFESSIONALLY MANAGED BY EDWIN B. RASKIN COMPANY SINCE 1954</div>
     </div>
+
   </div>
-
-  <!-- FOOTER -->
-  <div class="footer-accent gold-line"></div>
-
-  <div class="managed">
-    <div class="managed-text" id="managed">PROFESSIONALLY MANAGED BY EDWIN B. RASKIN COMPANY SINCE 1954</div>
-  </div>
-
 </div>
 
 <script>
 const URL = "https://docs.google.com/spreadsheets/d/1O_8s-4uoGnKGaWkPHQ2yYXStX1OVBjJsmK7DC3oYWJ4/export?format=csv";
 
-/* SAFE CSV */
+function fitScreen() {
+  const viewport = document.getElementById('viewport');
+  const screen = document.getElementById('screen');
+
+  const scaleX = viewport.clientWidth / 2160;
+  const scaleY = viewport.clientHeight / 3840;
+  const scale = Math.min(scaleX, scaleY);
+
+  screen.style.transform = 'scale(' + scale + ')';
+  screen.style.left = ((viewport.clientWidth - (2160 * scale)) / 2) + 'px';
+  screen.style.top = ((viewport.clientHeight - (3840 * scale)) / 2) + 'px';
+}
+
 function parseCSV(text){
   const rows=[]; let row=[]; let cell=""; let q=false;
   for(let i=0;i<text.length;i++){
@@ -346,7 +368,6 @@ function parseCSV(text){
   return rows;
 }
 
-/* LOAD */
 function load(){
   fetch(URL + "&t=" + Date.now())
     .then(r=>r.text())
@@ -360,7 +381,6 @@ function load(){
     });
 }
 
-/* APPLY */
 function apply(d){
   set("building-number", d.building_number);
   set("building-street", d.building_street);
@@ -398,12 +418,10 @@ function apply(d){
   document.getElementById("directory").innerHTML = html;
 }
 
-/* HELPERS */
 function set(id,val){
   if(val) document.getElementById(id).innerHTML = val;
 }
 
-/* TIME */
 function time(){
   let d=new Date();
   let h=d.getHours()%12||12;
@@ -412,10 +430,12 @@ function time(){
   document.getElementById("time").innerHTML = h + ":" + m + " " + am;
 }
 
-/* INIT */
+window.addEventListener('resize', fitScreen);
+
 setInterval(load, 5000);
 setInterval(time, 1000);
 
+fitScreen();
 load();
 time();
 </script>
