@@ -9,7 +9,6 @@
     --bg: #000000;
     --fg: #ffffff;
     --muted: rgba(255,255,255,0.74);
-    --muted-2: rgba(255,255,255,0.58);
     --gold-1: #6f5320;
     --gold-2: #caa15b;
     --gold-3: #f4ddb0;
@@ -37,6 +36,7 @@
     background: transparent;
   }
 
+  /* Horizontal player / TV viewport */
   #viewport {
     position: fixed;
     inset: 0;
@@ -44,14 +44,28 @@
     background: var(--bg);
   }
 
+  /* Horizontal stage that fills the screen */
+  #stage {
+    position: absolute;
+    width: 3840px;
+    height: 2160px;
+    left: 0;
+    top: 0;
+    transform-origin: top left;
+    overflow: hidden;
+    background: var(--bg);
+  }
+
+  /* True portrait page rotated into the horizontal stage */
   #screen {
     position: absolute;
     width: 2160px;
     height: 3840px;
-    left: 0;
+    left: 2160px;
     top: 0;
     background: var(--bg);
     transform-origin: top left;
+    transform: rotate(90deg);
     overflow: hidden;
   }
 
@@ -389,118 +403,120 @@
 <body>
 
 <div id="viewport">
-  <div id="screen">
+  <div id="stage">
+    <div id="screen">
 
-    <div class="top-accent gold-line"></div>
+      <div class="top-accent gold-line"></div>
 
-    <div class="header">
-      <div class="title-block">
-        <div class="title-line-1" id="building-number">110</div>
-        <div class="title-line-2" id="building-street">29TH AVENUE</div>
-        <div class="title-line-3" id="building-direction">NORTH</div>
-      </div>
+      <div class="header">
+        <div class="title-block">
+          <div class="title-line-1" id="building-number">110</div>
+          <div class="title-line-2" id="building-street">29TH AVENUE</div>
+          <div class="title-line-3" id="building-direction">NORTH</div>
+        </div>
 
-      <div class="meta">
-        <div class="time" id="time">--:--</div>
-        <div class="city" id="city">NASHVILLE TN</div>
-        <div class="weather">
-          <div class="weather-icon-wrap" id="weather-icon-wrap"></div>
-          <div class="weather-text" id="weather-text">--° --</div>
+        <div class="meta">
+          <div class="time" id="time">--:--</div>
+          <div class="city" id="city">NASHVILLE TN</div>
+          <div class="weather">
+            <div class="weather-icon-wrap" id="weather-icon-wrap"></div>
+            <div class="weather-text" id="weather-text">--° --</div>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="directory-title-wrap">
-      <div class="directory-title-line gold-line"></div>
-      <div class="directory-title" id="directory-title">BUILDING DIRECTORY</div>
-    </div>
-
-    <div class="directory-shell">
-      <div class="directory-head">
-        <div class="directory-head-suite">SUITE</div>
-        <div class="directory-head-tenant">TENANT</div>
+      <div class="directory-title-wrap">
+        <div class="directory-title-line gold-line"></div>
+        <div class="directory-title" id="directory-title">BUILDING DIRECTORY</div>
       </div>
-      <div class="directory-head-line gold-line"></div>
 
-      <div class="directory" id="directory">
-        <div class="row">
-          <div class="suite">100</div>
-          <div class="tenant-wrap">
-            <div class="tenant">301</div>
-            <div class="sub">ABSKIDS
+      <div class="directory-shell">
+        <div class="directory-head">
+          <div class="directory-head-suite">SUITE</div>
+          <div class="directory-head-tenant">TENANT</div>
+        </div>
+        <div class="directory-head-line gold-line"></div>
+
+        <div class="directory" id="directory">
+          <div class="row">
+            <div class="suite">100</div>
+            <div class="tenant-wrap">
+              <div class="tenant">301</div>
+              <div class="sub">ABSKIDS
 ABA THERAPY &amp; BEYOND</div>
+            </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="suite">200</div>
-          <div class="tenant-wrap">
-            <div class="tenant">LC LIFESTYLE COMMUNITIES</div>
-            <div class="sub"></div>
+          <div class="row">
+            <div class="suite">200</div>
+            <div class="tenant-wrap">
+              <div class="tenant">LC LIFESTYLE COMMUNITIES</div>
+              <div class="sub"></div>
+            </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="suite">300</div>
-          <div class="tenant-wrap">
-            <div class="tenant">IE AESTHETICS</div>
-            <div class="sub">AESTHETIC EXCELLENCE</div>
+          <div class="row">
+            <div class="suite">300</div>
+            <div class="tenant-wrap">
+              <div class="tenant">IE AESTHETICS</div>
+              <div class="sub">AESTHETIC EXCELLENCE</div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <div class="lower-section">
-      <div class="leasing-left">
-        <div class="leasing-line gold-line"></div>
-        <div class="leasing-title" id="leasing-title">NOW LEASING</div>
-        <div class="leasing-copy">
-          <div id="leasing-line-1">RENOVATED SUITES AVAILABLE</div>
-          <div class="leasing-highlight" id="leasing-highlight">1,500 - 7,000 SF</div>
-          <div id="leasing-ideal-for-label">IDEAL FOR:</div>
-          <div id="leasing-ideal-for-items">MEDICAL AESTHETICS PROFESSIONAL</div>
-          <div id="leasing-scan-line-1">SCAN TO LEARN MORE</div>
-          <div id="leasing-scan-line-2">ABOUT AVAILABLE SUITES</div>
+      <div class="lower-section">
+        <div class="leasing-left">
+          <div class="leasing-line gold-line"></div>
+          <div class="leasing-title" id="leasing-title">NOW LEASING</div>
+          <div class="leasing-copy">
+            <div id="leasing-line-1">RENOVATED SUITES AVAILABLE</div>
+            <div class="leasing-highlight" id="leasing-highlight">1,500 - 7,000 SF</div>
+            <div id="leasing-ideal-for-label">IDEAL FOR:</div>
+            <div id="leasing-ideal-for-items">MEDICAL AESTHETICS PROFESSIONAL</div>
+            <div id="leasing-scan-line-1">SCAN TO LEARN MORE</div>
+            <div id="leasing-scan-line-2">ABOUT AVAILABLE SUITES</div>
+          </div>
+        </div>
+
+        <div class="leasing-right">
+          <div class="contact-lead" id="contact-section-title">PLEASE CONTACT</div>
+          <div class="contact-name" id="contact-name">CARLA BACA</div>
+          <div class="contact-title" id="contact-role">MEDICAL OFFICE SPECIALIST</div>
+          <div class="contact-info">
+            <div id="contact-phone">(636) 236-8876</div>
+            <div id="contact-email">cbaca@sagemontre.com</div>
+          </div>
+          <div class="contact-lead" id="contact-qr-text">SCAN TO SAVE CONTACT DETAILS</div>
         </div>
       </div>
 
-      <div class="leasing-right">
-        <div class="contact-lead" id="contact-section-title">PLEASE CONTACT</div>
-        <div class="contact-name" id="contact-name">CARLA BACA</div>
-        <div class="contact-title" id="contact-role">MEDICAL OFFICE SPECIALIST</div>
-        <div class="contact-info">
-          <div id="contact-phone">(636) 236-8876</div>
-          <div id="contact-email">cbaca@sagemontre.com</div>
-        </div>
-        <div class="contact-lead" id="contact-qr-text">SCAN TO SAVE CONTACT DETAILS</div>
+      <div class="footer-accent gold-line"></div>
+
+      <div class="managed">
+        <div class="managed-text" id="managed">PROFESSIONALLY MANAGED BY EDWIN B. RASKIN COMPANY SINCE 1954</div>
       </div>
+
     </div>
-
-    <div class="footer-accent gold-line"></div>
-
-    <div class="managed">
-      <div class="managed-text" id="managed">PROFESSIONALLY MANAGED BY EDWIN B. RASKIN COMPANY SINCE 1954</div>
-    </div>
-
   </div>
 </div>
 
 <script>
 const URL = "https://docs.google.com/spreadsheets/d/1O_8s-4uoGnKGaWkPHQ2yYXStX1OVBjJsmK7DC3oYWJ4/export?format=csv";
 
-function fitScreen() {
+function fitHorizontalStage() {
   const viewport = document.getElementById('viewport');
-  const screen = document.getElementById('screen');
+  const stage = document.getElementById('stage');
 
-  const baseW = 2160;
-  const baseH = 3840;
+  const baseW = 3840;
+  const baseH = 2160;
 
   const scale = Math.min(
     viewport.clientWidth / baseW,
     viewport.clientHeight / baseH
   );
 
-  screen.style.transform = 'scale(' + scale + ')';
-  screen.style.left = ((viewport.clientWidth - (baseW * scale)) / 2) + 'px';
-  screen.style.top = ((viewport.clientHeight - (baseH * scale)) / 2) + 'px';
+  stage.style.transform = 'scale(' + scale + ')';
+  stage.style.left = ((viewport.clientWidth - (baseW * scale)) / 2) + 'px';
+  stage.style.top = ((viewport.clientHeight - (baseH * scale)) / 2) + 'px';
 }
 
 function parseCSV(text) {
@@ -729,13 +745,13 @@ function load() {
     .catch(() => {});
 }
 
-window.addEventListener('resize', fitScreen);
+window.addEventListener('resize', fitHorizontalStage);
 
 setInterval(load, 5000);
 setInterval(updateTime, 1000);
 setInterval(updateWeather, 300000);
 
-fitScreen();
+fitHorizontalStage();
 load();
 updateTime();
 updateWeather();
@@ -743,3 +759,4 @@ updateWeather();
 
 </body>
 </html>
+
