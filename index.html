@@ -23,7 +23,7 @@ html, body {
   background: #000;
 }
 
-/* Rotated preview stage: portrait canvas shown sideways for easier browser preview */
+/* Rotated browser-preview stage */
 #stage {
   position: absolute;
   width: 3840px;
@@ -77,26 +77,45 @@ html, body {
   right: 0;
   top: 0;
   text-align: right;
+  min-width: 520px;
 }
 
 .time {
   font-size: 80px;
-  line-height: 1.1;
+  line-height: 1.05;
+  letter-spacing: .04em;
 }
 
 .city {
   font-size: 34px;
-  line-height: 1.25;
+  line-height: 1.2;
   opacity: .82;
   text-transform: uppercase;
+  letter-spacing: .12em;
+  margin-top: 8px;
 }
 
 .weather {
-  font-size: 28px;
-  line-height: 1.35;
-  opacity: .72;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 18px;
+  margin-top: 10px;
+  min-height: 86px;
+}
+
+.weather-icon {
+  font-size: 64px;
+  line-height: 1;
+  filter: drop-shadow(0 0 10px rgba(255,255,255,.10));
+}
+
+.weather-text {
+  font-size: 58px;
+  line-height: 1;
+  letter-spacing: .05em;
   text-transform: uppercase;
-  margin-top: 6px;
+  font-weight: 300;
 }
 
 .logo {
@@ -167,15 +186,26 @@ html, body {
   text-transform: uppercase;
 }
 
+/* Fixed side-by-side lower section */
 .leasing-section {
   position: absolute;
   top: 2320px;
   left: 140px;
   right: 140px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  column-gap: 140px;
-  align-items: start;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 120px;
+}
+
+.leasing-left {
+  width: 48%;
+  flex: 0 0 48%;
+}
+
+.leasing-right {
+  width: 42%;
+  flex: 0 0 42%;
 }
 
 .leasing-title {
@@ -233,10 +263,9 @@ html, body {
 }
 
 .qr-wrap {
-  display: grid;
-  grid-template-columns: 220px 1fr;
-  column-gap: 24px;
+  display: flex;
   align-items: center;
+  gap: 24px;
   margin-top: 16px;
 }
 
@@ -247,6 +276,7 @@ html, body {
   padding: 10px;
   display: block;
   object-fit: contain;
+  flex: 0 0 220px;
 }
 
 .qr-caption {
@@ -297,7 +327,10 @@ html, body {
         <div class="meta">
           <div class="time" id="time">--:--</div>
           <div class="city" id="city">NASHVILLE TN</div>
-          <div class="weather" id="weather">--° --</div>
+          <div class="weather">
+            <div class="weather-icon" id="weather-icon">☀️</div>
+            <div class="weather-text" id="weather-text">--° --</div>
+          </div>
         </div>
 
         <img src="Sagemont_Logo.png" class="logo" alt="Sagemont logo">
@@ -330,7 +363,7 @@ html, body {
       </div>
 
       <div class="leasing-section">
-        <div>
+        <div class="leasing-left">
           <div class="leasing-title" id="leasing-title">NOW LEASING</div>
           <div class="leasing-copy">
             <div id="leasing-line-1">RENOVATED SUITES AVAILABLE</div>
@@ -342,7 +375,7 @@ html, body {
           </div>
         </div>
 
-        <div>
+        <div class="leasing-right">
           <div class="contact-lead" id="contact-section-title">PLEASE CONTACT</div>
           <div class="contact-name" id="contact-name">CARLA BACA</div>
           <div class="contact-title" id="contact-role">MEDICAL OFFICE SPECIALIST</div>
@@ -444,29 +477,50 @@ function updateTime(){
 
 function weatherCodeToText(code) {
   const map = {
-    0:'CLEAR',1:'MAINLY CLEAR',2:'PARTLY CLOUDY',3:'OVERCAST',
-    45:'FOG',48:'FOG',51:'LIGHT DRIZZLE',53:'DRIZZLE',55:'HEAVY DRIZZLE',
-    61:'LIGHT RAIN',63:'RAIN',65:'HEAVY RAIN',71:'LIGHT SNOW',73:'SNOW',
-    75:'HEAVY SNOW',80:'RAIN SHOWERS',81:'HEAVY SHOWERS',82:'VIOLENT SHOWERS',95:'THUNDERSTORM'
+    0:'CLEAR', 1:'MAINLY CLEAR', 2:'PARTLY CLOUDY', 3:'OVERCAST',
+    45:'FOG', 48:'FOG',
+    51:'LIGHT DRIZZLE', 53:'DRIZZLE', 55:'HEAVY DRIZZLE',
+    61:'LIGHT RAIN', 63:'RAIN', 65:'HEAVY RAIN',
+    71:'LIGHT SNOW', 73:'SNOW', 75:'HEAVY SNOW',
+    80:'RAIN SHOWERS', 81:'HEAVY SHOWERS', 82:'VIOLENT SHOWERS',
+    95:'THUNDERSTORM'
   };
   return map.hasOwnProperty(code) ? map[code] : '--';
 }
 
+function weatherCodeToIcon(code) {
+  if (code === 0 || code === 1) return '☀️';
+  if (code === 2 || code === 3) return '☁️';
+  if (code === 45 || code === 48) return '🌫️';
+  if (code === 51 || code === 53 || code === 55 || code === 61 || code === 63 || code === 65 || code === 80 || code === 81 || code === 82) return '🌧️';
+  if (code === 71 || code === 73 || code === 75) return '❄️';
+  if (code === 95 || code === 96 || code === 99) return '⛈️';
+  return '☁️';
+}
+
 function updateWeather() {
-  const weatherEl = document.getElementById('weather');
+  const weatherText = document.getElementById('weather-text');
+  const weatherIcon = document.getElementById('weather-icon');
+
   fetch('https://api.open-meteo.com/v1/forecast?latitude=36.1627&longitude=-86.7816&current=temperature_2m,weather_code&temperature_unit=fahrenheit&timezone=America%2FChicago')
     .then(r => r.json())
     .then(data => {
       if (data && data.current) {
         const temp = Math.round(data.current.temperature_2m);
-        const condition = weatherCodeToText(data.current.weather_code);
-        weatherEl.textContent = temp + '°F ' + condition;
+        const code = data.current.weather_code;
+        const condition = weatherCodeToText(code);
+        const icon = weatherCodeToIcon(code);
+
+        weatherText.textContent = temp + '° ' + condition;
+        weatherIcon.textContent = icon;
       } else {
-        weatherEl.textContent = '--° --';
+        weatherText.textContent = '--° --';
+        weatherIcon.textContent = '☁️';
       }
     })
     .catch(() => {
-      weatherEl.textContent = '--° --';
+      weatherText.textContent = '--° --';
+      weatherIcon.textContent = '☁️';
     });
 }
 
