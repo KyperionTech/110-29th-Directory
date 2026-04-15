@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>110 29TH AVENUE NORTH DIRECTORY</title>
 <style>
   :root {
     --bg: #000000;
     --fg: #ffffff;
-    --muted: rgba(255,255,255,0.72);
-    --muted-2: rgba(255,255,255,0.54);
+    --muted: rgba(255,255,255,0.74);
+    --muted-2: rgba(255,255,255,0.58);
     --gold-1: #6f5320;
     --gold-2: #caa15b;
     --gold-3: #f4ddb0;
@@ -37,7 +37,6 @@
     background: transparent;
   }
 
-  /* Constant portrait preview */
   #viewport {
     position: fixed;
     inset: 0;
@@ -121,21 +120,12 @@
     position: absolute;
     right: 0;
     top: 0;
-    width: 540px;
+    width: 620px;
     text-align: right;
   }
 
-  .logo {
-    position: absolute;
-    top: -8px;
-    right: 0;
-    height: 112px;
-    object-fit: contain;
-    opacity: 0.98;
-  }
-
   .time {
-    margin-top: 134px;
+    margin-top: 0;
     font-size: 80px;
     font-weight: 300;
     letter-spacing: 0.06em;
@@ -279,6 +269,7 @@
     line-height: 1.34;
     text-transform: uppercase;
     color: var(--muted);
+    white-space: pre-line;
   }
 
   .lower-section {
@@ -344,33 +335,6 @@
     margin-bottom: 18px;
   }
 
-  .contact-top {
-    display: grid;
-    grid-template-columns: 240px 1fr;
-    column-gap: 26px;
-    align-items: start;
-  }
-
-  .headshot,
-  .headshot-placeholder {
-    width: 240px;
-    height: 300px;
-    display: block;
-    object-fit: cover;
-    background: rgba(255,255,255,0.03);
-    border: 1px solid rgba(220,194,139,0.34);
-  }
-
-  .headshot-placeholder {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: rgba(220,194,139,0.66);
-    font-size: 18px;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-  }
-
   .contact-name {
     font-size: 62px;
     font-weight: 500;
@@ -394,31 +358,6 @@
     line-height: 1.42;
     margin-bottom: 20px;
     word-break: break-word;
-  }
-
-  .qr-wrap {
-    display: flex;
-    align-items: center;
-    gap: 22px;
-    margin-top: 24px;
-  }
-
-  .qr-code {
-    width: 210px;
-    height: 210px;
-    background: #fff;
-    padding: 10px;
-    display: block;
-    object-fit: contain;
-    flex: 0 0 210px;
-  }
-
-  .qr-caption {
-    font-size: 24px;
-    font-weight: 300;
-    line-height: 1.42;
-    text-transform: uppercase;
-    letter-spacing: 0.16em;
   }
 
   .footer-accent {
@@ -450,145 +389,118 @@
 <body>
 
 <div id="viewport">
-  <div id="stage">
-    <div id="screen">
+  <div id="screen">
 
-      <div class="top-accent gold-line"></div>
+    <div class="top-accent gold-line"></div>
 
-      <div class="header">
-        <div class="title-block">
-          <div class="title-line-1" id="building-number">110</div>
-          <div class="title-line-2" id="building-street">29TH AVENUE</div>
-          <div class="title-line-3" id="building-direction">NORTH</div>
-        </div>
-
-        <div class="meta">
-          <img src="Sagemont_Logo.png" class="logo" alt="Sagemont logo">
-          <div class="time" id="time">--:--</div>
-          <div class="city" id="city">NASHVILLE TN</div>
-          <div class="weather">
-            <div class="weather-icon-wrap" id="weather-icon-wrap"></div>
-            <div class="weather-text" id="weather-text">--° --</div>
-          </div>
-        </div>
+    <div class="header">
+      <div class="title-block">
+        <div class="title-line-1" id="building-number">110</div>
+        <div class="title-line-2" id="building-street">29TH AVENUE</div>
+        <div class="title-line-3" id="building-direction">NORTH</div>
       </div>
 
-      <div class="directory-title-wrap">
-        <div class="directory-title-line gold-line"></div>
-        <div class="directory-title" id="directory-title">BUILDING DIRECTORY</div>
-      </div>
-
-      <div class="directory-shell">
-        <div class="directory-head">
-          <div class="directory-head-suite">SUITE</div>
-          <div class="directory-head-tenant">TENANT</div>
-        </div>
-        <div class="directory-head-line gold-line"></div>
-
-        <div class="directory" id="directory">
-          <div class="row">
-            <div class="suite">100</div>
-            <div class="tenant-wrap">
-              <div class="tenant">301</div>
-              <div class="sub">ABSKIDS<br>ABA THERAPY &amp; BEYOND</div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="suite">200</div>
-            <div class="tenant-wrap">
-              <div class="tenant">LC LIFESTYLE COMMUNITIES</div>
-              <div class="sub">&nbsp;</div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="suite">300</div>
-            <div class="tenant-wrap">
-              <div class="tenant">IE AESTHETICS</div>
-              <div class="sub">AESTHETIC EXCELLENCE</div>
-            </div>
-          </div>
+      <div class="meta">
+        <div class="time" id="time">--:--</div>
+        <div class="city" id="city">NASHVILLE TN</div>
+        <div class="weather">
+          <div class="weather-icon-wrap" id="weather-icon-wrap"></div>
+          <div class="weather-text" id="weather-text">--° --</div>
         </div>
       </div>
-
-      <div class="lower-section">
-        <div class="leasing-left">
-          <div class="leasing-line gold-line"></div>
-          <div class="leasing-title" id="leasing-title">NOW LEASING</div>
-          <div class="leasing-copy">
-            <div id="leasing-line-1">RENOVATED SUITES AVAILABLE</div>
-            <div class="leasing-highlight" id="leasing-highlight">1,500 - 7,000 SF</div>
-            <div id="leasing-ideal-for-label">IDEAL FOR:</div>
-            <div id="leasing-ideal-for-items">MEDICAL AESTHETICS PROFESSIONAL</div>
-            <div id="leasing-scan-line-1">SCAN TO LEARN MORE</div>
-            <div id="leasing-scan-line-2">ABOUT AVAILABLE SUITES</div>
-          </div>
-        </div>
-
-        <div class="leasing-right">
-          <div class="contact-lead" id="contact-section-title">PLEASE CONTACT</div>
-
-          <div class="contact-top">
-            <div id="headshot-slot" class="headshot-placeholder">HEADSHOT</div>
-
-            <div>
-              <div class="contact-name" id="contact-name">CARLA BACA</div>
-              <div class="contact-title" id="contact-role">MEDICAL OFFICE SPECIALIST</div>
-              <div class="contact-info">
-                <div id="contact-phone">(636) 236-8876</div>
-                <div id="contact-email">cbaca@sagemontre.com</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="qr-wrap">
-            <img src="110-qr.jpg" class="qr-code" id="qr-image" alt="QR code">
-            <div class="qr-caption" id="contact-qr-text">SCAN TO SAVE CONTACT DETAILS</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="footer-accent gold-line"></div>
-
-      <div class="managed">
-        <div class="managed-text" id="managed">PROFESSIONALLY MANAGED BY EDWIN B. RASKIN COMPANY SINCE 1954</div>
-      </div>
-
     </div>
+
+    <div class="directory-title-wrap">
+      <div class="directory-title-line gold-line"></div>
+      <div class="directory-title" id="directory-title">BUILDING DIRECTORY</div>
+    </div>
+
+    <div class="directory-shell">
+      <div class="directory-head">
+        <div class="directory-head-suite">SUITE</div>
+        <div class="directory-head-tenant">TENANT</div>
+      </div>
+      <div class="directory-head-line gold-line"></div>
+
+      <div class="directory" id="directory">
+        <div class="row">
+          <div class="suite">100</div>
+          <div class="tenant-wrap">
+            <div class="tenant">301</div>
+            <div class="sub">ABSKIDS
+ABA THERAPY &amp; BEYOND</div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="suite">200</div>
+          <div class="tenant-wrap">
+            <div class="tenant">LC LIFESTYLE COMMUNITIES</div>
+            <div class="sub"></div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="suite">300</div>
+          <div class="tenant-wrap">
+            <div class="tenant">IE AESTHETICS</div>
+            <div class="sub">AESTHETIC EXCELLENCE</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="lower-section">
+      <div class="leasing-left">
+        <div class="leasing-line gold-line"></div>
+        <div class="leasing-title" id="leasing-title">NOW LEASING</div>
+        <div class="leasing-copy">
+          <div id="leasing-line-1">RENOVATED SUITES AVAILABLE</div>
+          <div class="leasing-highlight" id="leasing-highlight">1,500 - 7,000 SF</div>
+          <div id="leasing-ideal-for-label">IDEAL FOR:</div>
+          <div id="leasing-ideal-for-items">MEDICAL AESTHETICS PROFESSIONAL</div>
+          <div id="leasing-scan-line-1">SCAN TO LEARN MORE</div>
+          <div id="leasing-scan-line-2">ABOUT AVAILABLE SUITES</div>
+        </div>
+      </div>
+
+      <div class="leasing-right">
+        <div class="contact-lead" id="contact-section-title">PLEASE CONTACT</div>
+        <div class="contact-name" id="contact-name">CARLA BACA</div>
+        <div class="contact-title" id="contact-role">MEDICAL OFFICE SPECIALIST</div>
+        <div class="contact-info">
+          <div id="contact-phone">(636) 236-8876</div>
+          <div id="contact-email">cbaca@sagemontre.com</div>
+        </div>
+        <div class="contact-lead" id="contact-qr-text">SCAN TO SAVE CONTACT DETAILS</div>
+      </div>
+    </div>
+
+    <div class="footer-accent gold-line"></div>
+
+    <div class="managed">
+      <div class="managed-text" id="managed">PROFESSIONALLY MANAGED BY EDWIN B. RASKIN COMPANY SINCE 1954</div>
+    </div>
+
   </div>
 </div>
 
 <script>
 const URL = "https://docs.google.com/spreadsheets/d/1O_8s-4uoGnKGaWkPHQ2yYXStX1OVBjJsmK7DC3oYWJ4/export?format=csv";
-const PREVIEW_ROTATE = false;
 
-function fitStage() {
+function fitScreen() {
   const viewport = document.getElementById('viewport');
-  const stage = document.getElementById('stage');
   const screen = document.getElementById('screen');
 
-  let stageWidth, stageHeight;
-
-  if (PREVIEW_ROTATE) {
-    stageWidth = 3840;
-    stageHeight = 2160;
-    screen.style.transform = 'translateX(3840px) rotate(90deg)';
-  } else {
-    stageWidth = 2160;
-    stageHeight = 3840;
-    screen.style.transform = 'none';
-  }
-
-  stage.style.width = stageWidth + 'px';
-  stage.style.height = stageHeight + 'px';
+  const baseW = 2160;
+  const baseH = 3840;
 
   const scale = Math.min(
-    viewport.clientWidth / stageWidth,
-    viewport.clientHeight / stageHeight
+    viewport.clientWidth / baseW,
+    viewport.clientHeight / baseH
   );
 
-  stage.style.transform = 'scale(' + scale + ')';
-  stage.style.left = ((viewport.clientWidth - (stageWidth * scale)) / 2) + 'px';
-  stage.style.top = ((viewport.clientHeight - (stageHeight * scale)) / 2) + 'px';
+  screen.style.transform = 'scale(' + scale + ')';
+  screen.style.left = ((viewport.clientWidth - (baseW * scale)) / 2) + 'px';
+  screen.style.top = ((viewport.clientHeight - (baseH * scale)) / 2) + 'px';
 }
 
 function parseCSV(text) {
@@ -743,15 +655,9 @@ function updateWeather() {
     });
 }
 
-function renderHeadshot(url) {
-  const slot = document.getElementById('headshot-slot');
-  if (!slot) return;
-
-  if (url && /^https?:\/\//i.test(url)) {
-    slot.outerHTML = '<img id="headshot-slot" class="headshot" src="' + url + '" alt="Headshot">';
-  } else if (slot.tagName.toLowerCase() === 'img') {
-    slot.outerHTML = '<div id="headshot-slot" class="headshot-placeholder">HEADSHOT</div>';
-  }
+function normalizeSubtext(text) {
+  if (!text) return '';
+  return text.replace(/\s*\|\s*/g, '\n');
 }
 
 function apply(d) {
@@ -771,14 +677,12 @@ function apply(d) {
 
   set("contact-section-title", d.contact_section_title);
   set("contact-name", d.contact_name);
-  set("contact-role", d.contact_title);
+  set("contact-title", d.contact_title || d.contact_role);
   set("contact-phone", d.contact_phone);
   set("contact-email", d.contact_email);
   set("contact-qr-text", d.contact_qr_text);
 
   set("managed", d.managed_by_text);
-
-  renderHeadshot(d.headshot_image_url);
 
   let html = "";
   let foundAny = false;
@@ -786,7 +690,7 @@ function apply(d) {
   for (let i = 1; i <= 3; i++) {
     const suite = d["suite_" + i] || "";
     const tenant = d["tenant_" + i] || "";
-    const sub = d["subtext_" + i] || "";
+    const sub = normalizeSubtext(d["subtext_" + i] || "");
 
     if (suite || tenant || sub) {
       foundAny = true;
@@ -795,7 +699,7 @@ function apply(d) {
           <div class="suite">${suite}</div>
           <div class="tenant-wrap">
             <div class="tenant">${tenant}</div>
-            <div class="sub">${sub.replaceAll("|","<br>")}</div>
+            <div class="sub">${sub}</div>
           </div>
         </div>`;
     }
@@ -814,9 +718,10 @@ function load() {
       const d = {};
 
       for (let i = 1; i < rows.length; i++) {
-        const k = rows[i][1];
-        const v = rows[i][3];
-        if (k) d[k.trim()] = (v || "").trim();
+        const row = rows[i] || [];
+        const k = (row[1] || '').trim();
+        const v = (row[3] || '').trim();
+        if (k) d[k] = v;
       }
 
       apply(d);
@@ -824,13 +729,13 @@ function load() {
     .catch(() => {});
 }
 
-window.addEventListener('resize', fitStage);
+window.addEventListener('resize', fitScreen);
 
 setInterval(load, 5000);
 setInterval(updateTime, 1000);
 setInterval(updateWeather, 300000);
 
-fitStage();
+fitScreen();
 load();
 updateTime();
 updateWeather();
