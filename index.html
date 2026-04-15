@@ -731,36 +731,6 @@ html, body {
 }
 </style>
 
-<script>
-const FORCE_ROTATION = 0; 
-/* use 0 for normal portrait
-   use 180 if the player flips top/bottom */
-
-function fitStage() {
-  const viewport = document.getElementById('viewport');
-  const screen = document.getElementById('screen');
-
-  const baseW = 2160;
-  const baseH = 3840;
-  const scale = Math.min(
-    viewport.clientWidth / baseW,
-    viewport.clientHeight / baseH
-  );
-
-  if (FORCE_ROTATION === 180) {
-    screen.style.transform =
-      'translate(' + (baseW * scale) + 'px,' + (baseH * scale) + 'px) rotate(180deg) scale(' + scale + ')';
-  } else {
-    screen.style.transform = 'scale(' + scale + ')';
-  }
-
-  screen.style.left = ((viewport.clientWidth - (baseW * scale)) / 2) + 'px';
-  screen.style.top = ((viewport.clientHeight - (baseH * scale)) / 2) + 'px';
-}
-
-window.addEventListener('resize', fitStage);
-window.addEventListener('load', fitStage);
-
 </script>
 
 </body>
