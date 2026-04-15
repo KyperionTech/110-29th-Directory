@@ -1,45 +1,50 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Directory</title>
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>110 29TH AVENUE NORTH DIRECTORY</title>
 <style>
 html, body {
   margin: 0;
   width: 100%;
   height: 100%;
+  overflow: hidden;
   background: #000;
   color: #fff;
   font-family: Helvetica, Arial, sans-serif;
-  overflow: hidden;
 }
 
 #viewport {
+  position: relative;
   width: 100vw;
   height: 100vh;
-  position: relative;
   overflow: hidden;
   background: #000;
 }
 
-#screen {
-  width: 2160px;
-  height: 3840px;
+/* Rotated preview stage: portrait canvas shown sideways for easier browser preview */
+#stage {
   position: absolute;
-  left: 0;
-  top: 0;
-  background: #000;
+  width: 3840px;
+  height: 2160px;
   transform-origin: top left;
 }
 
-/* GOLD */
+#screen {
+  position: absolute;
+  width: 2160px;
+  height: 3840px;
+  background: #000;
+  transform-origin: top left;
+  transform: translateX(3840px) rotate(90deg);
+}
+
 .gold-line {
   height: 3px;
   background: linear-gradient(90deg, #6e5320, #d9bd7a, #fff2b0, #d9bd7a, #6e5320);
 }
 
-/* HEADER */
 .header {
   position: absolute;
   top: 120px;
@@ -51,17 +56,20 @@ html, body {
   font-size: 200px;
   font-weight: 700;
   letter-spacing: .12em;
+  line-height: 1;
 }
 
 .title-line-2 {
   font-size: 90px;
   letter-spacing: .28em;
+  line-height: 1.05;
 }
 
 .title-line-3 {
   font-size: 60px;
   letter-spacing: .34em;
-  opacity: .7;
+  line-height: 1.05;
+  opacity: .75;
 }
 
 .meta {
@@ -73,22 +81,32 @@ html, body {
 
 .time {
   font-size: 80px;
+  line-height: 1.1;
 }
 
 .city {
   font-size: 34px;
+  line-height: 1.25;
+  opacity: .82;
+  text-transform: uppercase;
 }
 
-/* LOGO */
+.weather {
+  font-size: 28px;
+  line-height: 1.35;
+  opacity: .72;
+  text-transform: uppercase;
+  margin-top: 6px;
+}
+
 .logo {
   position: absolute;
   top: -40px;
   right: 0;
   height: 120px;
-  opacity: 0.95;
+  object-fit: contain;
 }
 
-/* DIRECTORY TITLE */
 .directory-title-wrap {
   position: absolute;
   top: 580px;
@@ -99,7 +117,7 @@ html, body {
 
 .directory-title-line {
   width: 460px;
-  margin: 0 auto 24px auto;
+  margin: 0 auto 24px;
 }
 
 .directory-title {
@@ -110,7 +128,6 @@ html, body {
   font-weight: 300;
 }
 
-/* DIRECTORY */
 .directory-shell {
   position: absolute;
   top: 760px;
@@ -124,28 +141,32 @@ html, body {
 }
 
 .suite {
-  font-size: 68px;
-  letter-spacing: .20em;
-  color: #f1e3bb;
   width: 240px;
   display: inline-block;
   vertical-align: top;
+  font-size: 68px;
+  letter-spacing: .20em;
+  color: #f1e3bb;
+  text-transform: uppercase;
 }
 
 .tenant {
-  font-size: 86px;
   display: inline-block;
   vertical-align: top;
+  font-size: 86px;
+  line-height: 1.08;
+  text-transform: uppercase;
 }
 
 .sub {
   font-size: 36px;
-  opacity: .7;
-  margin-top: 10px;
+  opacity: .74;
+  margin-top: 12px;
   line-height: 1.35;
+  letter-spacing: .04em;
+  text-transform: uppercase;
 }
 
-/* LEASING */
 .leasing-section {
   position: absolute;
   top: 2320px;
@@ -162,18 +183,18 @@ html, body {
   color: #d9bd7a;
   letter-spacing: .24em;
   text-transform: uppercase;
-  margin-bottom: 32px;
+  margin-bottom: 30px;
   font-weight: 500;
 }
 
 .leasing-copy {
   font-size: 48px;
-  line-height: 1.6;
+  line-height: 1.55;
   text-transform: uppercase;
 }
 
 .leasing-copy div {
-  margin-bottom: 14px;
+  margin-bottom: 12px;
 }
 
 .leasing-highlight {
@@ -186,29 +207,29 @@ html, body {
   color: #d9bd7a;
   letter-spacing: .22em;
   text-transform: uppercase;
-  margin-bottom: 20px;
+  margin-bottom: 18px;
 }
 
 .contact-name {
   font-size: 70px;
   font-weight: 600;
   line-height: 1.1;
-  margin-bottom: 18px;
+  margin-bottom: 16px;
   text-transform: uppercase;
 }
 
 .contact-title {
   font-size: 40px;
-  line-height: 1.35;
-  margin-bottom: 22px;
+  line-height: 1.3;
+  margin-bottom: 20px;
   text-transform: uppercase;
-  opacity: .85;
+  opacity: .86;
 }
 
 .contact-info {
   font-size: 44px;
-  line-height: 1.45;
-  margin-bottom: 24px;
+  line-height: 1.4;
+  margin-bottom: 22px;
 }
 
 .qr-wrap {
@@ -216,7 +237,7 @@ html, body {
   grid-template-columns: 220px 1fr;
   column-gap: 24px;
   align-items: center;
-  margin-top: 20px;
+  margin-top: 16px;
 }
 
 .qr-code {
@@ -225,16 +246,16 @@ html, body {
   background: #fff;
   padding: 10px;
   display: block;
+  object-fit: contain;
 }
 
 .qr-caption {
   font-size: 28px;
-  line-height: 1.45;
+  line-height: 1.4;
   text-transform: uppercase;
   letter-spacing: .14em;
 }
 
-/* FOOTER */
 .footer-accent {
   position: absolute;
   bottom: 470px;
@@ -255,129 +276,197 @@ html, body {
   letter-spacing: .18em;
   line-height: 1.35;
   text-transform: uppercase;
-  color: rgba(255,255,255,.86);
+  color: rgba(255,255,255,.88);
   font-family: "Perpetua Titling MT", "Perpetua", "Times New Roman", serif;
 }
 </style>
 </head>
-
 <body>
 
 <div id="viewport">
-  <div id="screen">
+  <div id="stage">
+    <div id="screen">
 
-    <div class="header">
-      <div>
-        <div class="title-line-1" id="building-number">110</div>
-        <div class="title-line-2" id="building-street">29TH AVENUE</div>
-        <div class="title-line-3" id="building-direction">NORTH</div>
+      <div class="header">
+        <div>
+          <div class="title-line-1" id="building-number">110</div>
+          <div class="title-line-2" id="building-street">29TH AVENUE</div>
+          <div class="title-line-3" id="building-direction">NORTH</div>
+        </div>
+
+        <div class="meta">
+          <div class="time" id="time">--:--</div>
+          <div class="city" id="city">NASHVILLE TN</div>
+          <div class="weather" id="weather">--° --</div>
+        </div>
+
+        <img src="Sagemont_Logo.png" class="logo" alt="Sagemont logo">
       </div>
 
-      <div class="meta">
-        <div class="time" id="time">--:--</div>
-        <div class="city" id="city">NASHVILLE TN</div>
+      <div class="directory-title-wrap">
+        <div class="gold-line directory-title-line"></div>
+        <div class="directory-title" id="directory-title">BUILDING DIRECTORY</div>
       </div>
 
-      <img src="Sagemont_Logo.png" class="logo" alt="Sagemont logo">
-    </div>
-
-    <div class="directory-title-wrap">
-      <div class="gold-line directory-title-line"></div>
-      <div class="directory-title" id="directory-title">BUILDING DIRECTORY</div>
-    </div>
-
-    <div class="directory-shell" id="directory"></div>
-
-    <div class="leasing-section">
-      <div>
-        <div class="leasing-title" id="leasing-title">NOW LEASING</div>
-        <div class="leasing-copy">
-          <div id="leasing-line-1">RENOVATED SUITES AVAILABLE</div>
-          <div class="leasing-highlight" id="leasing-highlight">1,500 - 7,000 SF</div>
-          <div id="leasing-ideal-for-label">IDEAL FOR:</div>
-          <div id="leasing-ideal-for-items">MEDICAL AESTHETICS PROFESSIONAL</div>
-          <div id="leasing-scan-line-1">SCAN TO LEARN MORE</div>
-          <div id="leasing-scan-line-2">ABOUT AVAILABLE SUITES</div>
+      <div class="directory-shell" id="directory">
+        <div class="row">
+          <div class="suite">100</div>
+          <div class="tenant">301
+            <div class="sub">ABSKIDS<br>ABA THERAPY &amp; BEYOND</div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="suite">200</div>
+          <div class="tenant">LC LIFESTYLE COMMUNITIES
+            <div class="sub">&nbsp;</div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="suite">300</div>
+          <div class="tenant">IE AESTHETICS
+            <div class="sub">AESTHETIC EXCELLENCE</div>
+          </div>
         </div>
       </div>
 
-      <div>
-        <div class="contact-lead" id="contact-section-title">PLEASE CONTACT</div>
-        <div class="contact-name" id="contact-name">CARLA BACA</div>
-        <div class="contact-title" id="contact-role">MEDICAL OFFICE SPECIALIST</div>
-        <div class="contact-info">
-          <div id="contact-phone">(636) 236-8876</div>
-          <div id="contact-email">cbaca@sagemontre.com</div>
+      <div class="leasing-section">
+        <div>
+          <div class="leasing-title" id="leasing-title">NOW LEASING</div>
+          <div class="leasing-copy">
+            <div id="leasing-line-1">RENOVATED SUITES AVAILABLE</div>
+            <div class="leasing-highlight" id="leasing-highlight">1,500 - 7,000 SF</div>
+            <div id="leasing-ideal-for-label">IDEAL FOR:</div>
+            <div id="leasing-ideal-for-items">MEDICAL AESTHETICS PROFESSIONAL</div>
+            <div id="leasing-scan-line-1">SCAN TO LEARN MORE</div>
+            <div id="leasing-scan-line-2">ABOUT AVAILABLE SUITES</div>
+          </div>
         </div>
 
-        <div class="qr-wrap">
-          <img src="110-qr.jpg" class="qr-code" id="qr-image" alt="QR code">
-          <div class="qr-caption" id="contact-qr-text">SCAN TO SAVE CONTACT DETAILS</div>
+        <div>
+          <div class="contact-lead" id="contact-section-title">PLEASE CONTACT</div>
+          <div class="contact-name" id="contact-name">CARLA BACA</div>
+          <div class="contact-title" id="contact-role">MEDICAL OFFICE SPECIALIST</div>
+          <div class="contact-info">
+            <div id="contact-phone">(636) 236-8876</div>
+            <div id="contact-email">cbaca@sagemontre.com</div>
+          </div>
+
+          <div class="qr-wrap">
+            <img src="110-qr.jpg" class="qr-code" id="qr-image" alt="QR code">
+            <div class="qr-caption" id="contact-qr-text">SCAN TO SAVE CONTACT DETAILS</div>
+          </div>
         </div>
       </div>
+
+      <div class="footer-accent gold-line"></div>
+
+      <div class="managed">
+        <div class="managed-text" id="managed">PROFESSIONALLY MANAGED BY EDWIN B. RASKIN COMPANY SINCE 1954</div>
+      </div>
+
     </div>
-
-    <div class="footer-accent gold-line"></div>
-
-    <div class="managed">
-      <div class="managed-text" id="managed">PROFESSIONALLY MANAGED BY EDWIN B. RASKIN COMPANY SINCE 1954</div>
-    </div>
-
   </div>
 </div>
 
 <script>
 const URL = "https://docs.google.com/spreadsheets/d/1O_8s-4uoGnKGaWkPHQ2yYXStX1OVBjJsmK7DC3oYWJ4/export?format=csv";
 
-function fitScreen() {
+function fitStage() {
   const viewport = document.getElementById('viewport');
-  const screen = document.getElementById('screen');
+  const stage = document.getElementById('stage');
 
-  const scaleX = viewport.clientWidth / 2160;
-  const scaleY = viewport.clientHeight / 3840;
-  const scale = Math.min(scaleX, scaleY);
+  const stageWidth = 3840;
+  const stageHeight = 2160;
+  const scale = Math.min(
+    viewport.clientWidth / stageWidth,
+    viewport.clientHeight / stageHeight
+  );
 
-  screen.style.transform = 'scale(' + scale + ')';
-  screen.style.left = ((viewport.clientWidth - (2160 * scale)) / 2) + 'px';
-  screen.style.top = ((viewport.clientHeight - (3840 * scale)) / 2) + 'px';
+  stage.style.transform = 'scale(' + scale + ')';
+  stage.style.left = ((viewport.clientWidth - (stageWidth * scale)) / 2) + 'px';
+  stage.style.top = ((viewport.clientHeight - (stageHeight * scale)) / 2) + 'px';
 }
 
 function parseCSV(text){
-  const rows=[]; let row=[]; let cell=""; let q=false;
-  for(let i=0;i<text.length;i++){
-    let c=text[i], n=text[i+1];
-    if(c=='"'){
-      if(q&&n=='"'){cell+='"';i++;}
-      else q=!q;
-    } else if(c==','&&!q){
-      row.push(cell); cell='';
-    } else if((c=='\n'||c=='\r')&&!q){
-      if(cell!=='' || row.length){
+  const rows = [];
+  let row = [];
+  let cell = "";
+  let q = false;
+
+  for(let i = 0; i < text.length; i++){
+    const c = text[i];
+    const n = text[i + 1];
+
+    if(c === '"'){
+      if(q && n === '"'){
+        cell += '"';
+        i++;
+      } else {
+        q = !q;
+      }
+    } else if(c === ',' && !q){
+      row.push(cell);
+      cell = "";
+    } else if((c === '\n' || c === '\r') && !q){
+      if(cell !== "" || row.length){
         row.push(cell);
         rows.push(row);
-        row=[]; cell='';
+        row = [];
+        cell = "";
       }
     } else {
-      cell+=c;
+      cell += c;
     }
   }
-  if(cell!=='' || row.length){
+
+  if(cell !== "" || row.length){
     row.push(cell);
     rows.push(row);
   }
+
   return rows;
 }
 
-function load(){
-  fetch(URL + "&t=" + Date.now())
-    .then(r=>r.text())
-    .then(t=>{
-      let rows=parseCSV(t), d={};
-      for(let i=1;i<rows.length;i++){
-        let k=rows[i][1], v=rows[i][3];
-        if(k) d[k.trim()] = (v || "").trim();
+function set(id, val){
+  if(val) document.getElementById(id).innerHTML = val;
+}
+
+function updateTime(){
+  const now = new Date();
+  const fmt = new Intl.DateTimeFormat('en-US', {
+    timeZone: 'America/Chicago',
+    hour: 'numeric',
+    minute: '2-digit',
+    hour12: true
+  });
+  document.getElementById('time').textContent = fmt.format(now);
+}
+
+function weatherCodeToText(code) {
+  const map = {
+    0:'CLEAR',1:'MAINLY CLEAR',2:'PARTLY CLOUDY',3:'OVERCAST',
+    45:'FOG',48:'FOG',51:'LIGHT DRIZZLE',53:'DRIZZLE',55:'HEAVY DRIZZLE',
+    61:'LIGHT RAIN',63:'RAIN',65:'HEAVY RAIN',71:'LIGHT SNOW',73:'SNOW',
+    75:'HEAVY SNOW',80:'RAIN SHOWERS',81:'HEAVY SHOWERS',82:'VIOLENT SHOWERS',95:'THUNDERSTORM'
+  };
+  return map.hasOwnProperty(code) ? map[code] : '--';
+}
+
+function updateWeather() {
+  const weatherEl = document.getElementById('weather');
+  fetch('https://api.open-meteo.com/v1/forecast?latitude=36.1627&longitude=-86.7816&current=temperature_2m,weather_code&temperature_unit=fahrenheit&timezone=America%2FChicago')
+    .then(r => r.json())
+    .then(data => {
+      if (data && data.current) {
+        const temp = Math.round(data.current.temperature_2m);
+        const condition = weatherCodeToText(data.current.weather_code);
+        weatherEl.textContent = temp + '°F ' + condition;
+      } else {
+        weatherEl.textContent = '--° --';
       }
-      apply(d);
+    })
+    .catch(() => {
+      weatherEl.textContent = '--° --';
     });
 }
 
@@ -405,39 +494,55 @@ function apply(d){
 
   set("managed", d.managed_by_text);
 
-  let html="";
-  for(let i=1;i<=3;i++){
-    html += `
-      <div class="row">
-        <div class="suite">${d["suite_"+i] || ""}</div>
-        <div class="tenant">${d["tenant_"+i] || ""}
-          <div class="sub">${(d["subtext_"+i] || "").replaceAll("|","<br>")}</div>
-        </div>
-      </div>`;
+  let html = "";
+  let foundAny = false;
+  for(let i = 1; i <= 3; i++){
+    const suite = d["suite_" + i] || "";
+    const tenant = d["tenant_" + i] || "";
+    const sub = d["subtext_" + i] || "";
+    if (suite || tenant || sub) {
+      foundAny = true;
+      html += `
+        <div class="row">
+          <div class="suite">${suite}</div>
+          <div class="tenant">${tenant}
+            <div class="sub">${sub.replaceAll("|","<br>")}</div>
+          </div>
+        </div>`;
+    }
   }
-  document.getElementById("directory").innerHTML = html;
+
+  if (foundAny) {
+    document.getElementById("directory").innerHTML = html;
+  }
 }
 
-function set(id,val){
-  if(val) document.getElementById(id).innerHTML = val;
+function load(){
+  fetch(URL + "&t=" + Date.now())
+    .then(r => r.text())
+    .then(t => {
+      const rows = parseCSV(t);
+      const d = {};
+      for(let i = 1; i < rows.length; i++){
+        const k = rows[i][1];
+        const v = rows[i][3];
+        if(k) d[k.trim()] = (v || "").trim();
+      }
+      apply(d);
+    })
+    .catch(() => {});
 }
 
-function time(){
-  let d=new Date();
-  let h=d.getHours()%12||12;
-  let m=("0"+d.getMinutes()).slice(-2);
-  let am=d.getHours()>=12?"PM":"AM";
-  document.getElementById("time").innerHTML = h + ":" + m + " " + am;
-}
-
-window.addEventListener('resize', fitScreen);
+window.addEventListener('resize', fitStage);
 
 setInterval(load, 5000);
-setInterval(time, 1000);
+setInterval(updateTime, 1000);
+setInterval(updateWeather, 300000);
 
-fitScreen();
+fitStage();
 load();
-time();
+updateTime();
+updateWeather();
 </script>
 
 </body>
