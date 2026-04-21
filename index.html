@@ -669,7 +669,7 @@ function apply(d) {
 
   set("contact-section-title", d.contact_section_title);
   set("contact-name", d.contact_name);
-  set("contact-title", d.contact_title);
+  set("contact-role", d.contact || d.contact_title || d.contact_role);
   set("contact-phone", d.contact_phone);
   set("contact-email", d.contact_email);
   set("contact-qr-text", d.contact_qr_text);
